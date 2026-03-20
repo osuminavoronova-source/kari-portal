@@ -598,11 +598,32 @@
   @media (max-width: 768px) {
     .admin-grid { grid-template-columns: 1fr; }
     .admin-sidebar { display: none; }
-    .app-main { padding: 1rem; }
+    .app-main { padding: 0.75rem; }
     .app-header { padding: 0.75rem 1rem; }
-    .header-store { max-width: 150px; }
+    .header-store { max-width: 130px; font-size: 0.75rem; }
     .export-panel { flex-direction: column; align-items: flex-start; }
-    .emp-table th:nth-child(2), .emp-table td:nth-child(2) { display: none; }
+
+    /* Таблица сотрудников — карточки на мобильном */
+    .emp-table-wrap { border-radius: 12px; overflow-x: hidden; }
+    .emp-table thead { display: none; }
+    .emp-table, .emp-table tbody, .emp-table tr, .emp-table td { display: block; width: 100%; box-sizing: border-box; }
+    .emp-table tr { border-bottom: 1px solid var(--border); padding: 10px 14px; }
+    .emp-table tr:last-child { border-bottom: none; }
+    .emp-table td { border: none; padding: 4px 0; font-size: 0.85rem; }
+    .emp-table td:first-child { display: none; } /* скрываем номер */
+    .emp-table td:nth-child(2) strong { font-size: 0.9rem; color: var(--text); }
+    .role-badge { font-size: 0.7rem; }
+    .fired-input { min-width: unset; width: 100%; margin-top: 4px; }
+    .status-select { width: 100%; margin-top: 4px; }
+
+    /* Кнопки */
+    .section-header { flex-wrap: wrap; gap: 6px; }
+    .btn-save-all { font-size: 0.7rem; padding: 8px 10px; margin-left: 0 !important; }
+
+    /* Статистика */
+    .stats-row { grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+    .stat-value { font-size: 1.4rem; }
+    .stat-label { font-size: 0.65rem; }
   }
 </style>
 </head>
@@ -1965,6 +1986,58 @@ function showToast(msg, type) {
 // Инициализация после загрузки всего HTML и скриптов
 loadSavedData();
 populateStoreSelect();
+
+// Авто-обновление данных для администратора каждые 30 секунд
+let _adminRefreshTimer = null;
+let _adminRefreshCountdown = 30;
+let _adminCountdownTimer = null;
+
+function startAdminAutoRefresh() {
+  stopAdminAutoRefresh();
+
+  // Таймер обновления каждые 30 сек
+  _adminRefreshTimer = setInterval(async () => {
+    const adminScreen = document.getElementById('admin-screen');
+    if (adminScreen && adminScreen.classList.contains('active')) {
+      await buildAdminSidebar();
+    }
+  }, 30000);
+
+  // Обратный отсчёт на кнопке
+  _adminRefreshCountdown = 30;
+  _adminCountdownTimer = setInterval(() => {
+    const adminScreen = document.getElementById('admin-screen');
+    if (!adminScreen || !adminScreen.classList.contains('active')) return;
+    _adminRefreshCountdown--;
+    if (_adminRefreshCountdown <= 0) _adminRefreshCountdown = 30;
+    const btn = document.querySelector('[onclick="buildAdminSidebar()"]');
+    if (btn) btn.textContent = `🔄 Обновить (${_adminRefreshCountdown}с)`;
+  }, 1000);
+}
+
+function stopAdminAutoRefresh() {
+  if (_adminRefreshTimer)   { clearInterval(_adminRefreshTimer);   _adminRefreshTimer = null; }
+  if (_adminCountdownTimer) { clearInterval(_adminCountdownTimer); _adminCountdownTimer = null; }
+}
+
+// Запускаем авто-обновление при входе в админку
+const _origLogin = login;
+login = function() {
+  _origLogin();
+  setTimeout(() => {
+    const adminScreen = document.getElementById('admin-screen');
+    if (adminScreen && adminScreen.classList.contains('active')) {
+      startAdminAutoRefresh();
+    }
+  }, 300);
+};
+
+// Останавливаем при выходе
+const _origLogout = logout;
+logout = function() {
+  stopAdminAutoRefresh();
+  _origLogout();
+};
 </script>
 </body>
 </html>
