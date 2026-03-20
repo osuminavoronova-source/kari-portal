@@ -430,9 +430,14 @@
     outline: none;
     transition: border-color 0.2s, background 0.2s;
   }
-  .fired-input:focus { border-color: var(--accent); background: rgba(232,197,71,0.04); }
-  .fired-input.has-value { border-color: var(--danger); background: rgba(255,107,107,0.06); color: var(--text); }
-  .fired-input:disabled { opacity: 0.35; cursor: not-allowed; background: var(--bg); }
+  .fired-input:not(:disabled) {
+    border: 2px solid var(--accent);
+    background: rgba(232,197,71,0.08);
+    box-shadow: 0 0 0 3px rgba(232,197,71,0.15);
+  }
+  .fired-input:focus { border-color: var(--accent); background: rgba(232,197,71,0.12); }
+  .fired-input.has-value { border-color: var(--danger); background: rgba(255,107,107,0.06); color: var(--text); box-shadow: 0 0 0 3px rgba(255,107,107,0.15); }
+  .fired-input:disabled { opacity: 0.3; cursor: not-allowed; background: var(--bg); border: 1px solid var(--border); box-shadow: none; }
 
   .status-select {
     background: var(--surface);
