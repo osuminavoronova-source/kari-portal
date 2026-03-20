@@ -6,6 +6,39 @@
 <title>Портал директоров — Отчёт по текучке</title>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
 
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDk6arTuC80D6c3yy02EKbCErdX_R4XmYE",
+    authDomain: "kari-portal.firebaseapp.com",
+    projectId: "kari-portal",
+    storageBucket: "kari-portal.firebasestorage.app",
+    messagingSenderId: "4823759039",
+    appId: "1:4823759039:web:09059fc59d205c3c4b6e0a"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  // Делаем db и функции доступными глобально
+  window._db = db;
+  window._fsDoc = doc;
+  window._fsSetDoc = setDoc;
+  window._fsGetDoc = getDoc;
+  window._fsOnSnapshot = onSnapshot;
+  window._fsCollection = collection;
+  window._firebaseReady = true;
+  console.log('✅ Firebase Firestore подключён');
+  // Обновляем индикатор статуса
+  setTimeout(() => {
+    const el = document.getElementById('firebase-status');
+    if (el) el.innerHTML = '🟢 Firebase подключён';
+  }, 500);
+</script>
+
 <style>
   :root {
     --bg: #0e0f14;
@@ -815,6 +848,10 @@
   <div class="admin-grid">
     <aside class="admin-sidebar">
       <div class="sidebar-title" id="sidebar-title">Магазины (100)</div>
+      <div style="display:flex;gap:6px;margin-bottom:0.75rem;">
+        <button onclick="buildAdminSidebar()" style="flex:1;background:rgba(78,205,196,0.15);border:1px solid rgba(78,205,196,0.3);color:var(--accent2);border-radius:8px;padding:7px;font-size:0.75rem;cursor:pointer;font-family:var(--font-head);font-weight:600;">🔄 Обновить из Firebase</button>
+      </div>
+      <div id="firebase-status" style="font-size:0.7rem;color:var(--muted);margin-bottom:0.75rem;text-align:center;">⏳ Подключение к Firebase...</div>
       <div style="margin-bottom:1rem;padding:10px;background:var(--surface);border-radius:10px;border:1px solid var(--border);">
         <div style="font-size:0.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">🔗 Webhook URL (Power Automate)</div>
         <div style="display:flex;gap:6px;">
@@ -954,6 +991,56 @@ function saveToPersistent() {
   try {
     localStorage.setItem('firedData', JSON.stringify(firedData));
   } catch(e) {}
+}
+
+// Сохранение данных магазина в Firestore
+async function saveStoreToFirestore(storeKey) {
+  if (!window._firebaseReady) return;
+  try {
+    const storeData = firedData[storeKey] || {};
+    const submitted = getSubmittedStores();
+    const noChanges = JSON.parse(localStorage.getItem('noChangesStores') || '{}');
+    const store = STORES[storeKey];
+    const firedEmps = store.employees.filter(e => getStatusOverride(storeKey, e.num) === 'Уволен');
+
+    await window._fsSetDoc(window._fsDoc(window._db, 'reports', storeKey), {
+      storeKey,
+      director: store.director,
+      email: EMAIL_MAP[storeKey] || '',
+      firedData: storeData,
+      firedCount: firedEmps.length,
+      firedList: firedEmps.map(e => ({
+        name: e.name,
+        role: e.role,
+        date: getFiredValue(storeKey, e.num)
+      })),
+      submittedAt: submitted[storeKey] || null,
+      noChangesAt: noChanges[storeKey] || null,
+      updatedAt: new Date().toISOString()
+    });
+    console.log('✅ Firestore: данные сохранены для', storeKey);
+  } catch(e) {
+    console.warn('⚠️ Firestore save error:', e);
+  }
+}
+
+// Загрузка статусов всех магазинов из Firestore (для админа)
+async function loadAllFromFirestore() {
+  if (!window._firebaseReady) return {};
+  try {
+    const snapshot = await new Promise((resolve) => {
+      const unsub = window._fsOnSnapshot(
+        window._fsCollection(window._db, 'reports'),
+        (snap) => { unsub(); resolve(snap); }
+      );
+    });
+    const result = {};
+    snapshot.forEach(d => { result[d.id] = d.data(); });
+    return result;
+  } catch(e) {
+    console.warn('⚠️ Firestore load error:', e);
+    return {};
+  }
 }
 
 // Init — wait for DOM
@@ -1126,6 +1213,7 @@ function onStatusChange(el, storeKey) {
 
   updateFiredStat(storeKey);
   saveToPersistent(); // автосохранение
+  saveStoreToFirestore(storeKey); // синхронизация с Firestore
 }
 
 function onFiredInput(el, storeKey) {
@@ -1136,6 +1224,7 @@ function onFiredInput(el, storeKey) {
   el.classList.toggle('has-value', !!el.value);
   updateFiredStat(storeKey);
   saveToPersistent(); // автосохранение
+  saveStoreToFirestore(storeKey); // синхронизация с Firestore
 }
 
 function updateFiredStat(storeKey) {
@@ -1186,6 +1275,9 @@ function submitReport() {
   const submitted = getSubmittedStores();
   submitted[currentStore] = new Date().toISOString();
   localStorage.setItem('submittedStores', JSON.stringify(submitted));
+
+  // Сохраняем в Firestore
+  saveStoreToFirestore(currentStore);
 
   // Формируем данные для webhook
   const store  = STORES[currentStore];
@@ -1251,6 +1343,9 @@ function submitNoChanges() {
   noChanges[currentStore] = new Date().toISOString();
   localStorage.setItem('noChangesStores', JSON.stringify(noChanges));
   localStorage.setItem('submittedStores', JSON.stringify(submitted));
+
+  // Сохраняем в Firestore
+  saveStoreToFirestore(currentStore);
 
   const btn = document.getElementById('no-changes-btn');
   btn.style.background = 'var(--success)';
@@ -1735,15 +1830,37 @@ function saveWebhook() {
 }
 
 // Admin
-function buildAdminSidebar() {
+async function buildAdminSidebar() {
   const list = document.getElementById('store-sidebar-list');
-  list.innerHTML = '';
+  list.innerHTML = '<div style="color:var(--muted);font-size:0.8rem;padding:1rem 0;">⏳ Загрузка данных...</div>';
 
   // Показываем текущий webhook если есть
   const savedUrl = localStorage.getItem('webhookUrl') || '';
   if (savedUrl) {
     document.getElementById('webhook-status').textContent = '✅ Сохранён: ' + savedUrl.substring(0, 40) + '...';
   }
+
+  // Загружаем актуальные данные из Firestore
+  let firestoreData = {};
+  if (window._firebaseReady) {
+    firestoreData = await loadAllFromFirestore();
+    // Синхронизируем localStorage из Firestore
+    const submitted = getSubmittedStores();
+    const noChanges = JSON.parse(localStorage.getItem('noChangesStores') || '{}');
+    Object.entries(firestoreData).forEach(([k, d]) => {
+      if (d.submittedAt) submitted[k] = d.submittedAt;
+      if (d.noChangesAt) noChanges[k] = d.noChangesAt;
+      if (d.firedData) {
+        if (!firedData[k]) firedData[k] = {};
+        Object.assign(firedData[k], d.firedData);
+      }
+    });
+    localStorage.setItem('submittedStores', JSON.stringify(submitted));
+    localStorage.setItem('noChangesStores', JSON.stringify(noChanges));
+    saveToPersistent();
+  }
+
+  list.innerHTML = '';
 
   const submitted = getSubmittedStores();
   const noChanges = JSON.parse(localStorage.getItem('noChangesStores') || '{}');
