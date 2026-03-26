@@ -1228,11 +1228,13 @@ function buildTable(storeKey) {
       <td>
         <input
           class="fired-input ${dateVal ? 'has-value' : ''}"
-          type="date"
+          type="text"
+          placeholder="ДД.ММ.ГГГГ"
           value="${dateVal}"
           data-emp="${empKey}"
+          maxlength="10"
           ${!isFired ? 'disabled' : ''}
-          onchange="onFiredInput(this, '${storeKey}')"
+          oninput="onFiredInput(this, '${storeKey}')"
         />
       </td>
     `;
@@ -1264,6 +1266,12 @@ function onStatusChange(el, storeKey) {
 }
 
 function onFiredInput(el, storeKey) {
+  // Автоматическая маска даты ДД.ММ.ГГГГ
+  let v = el.value.replace(/\D/g, '');
+  if (v.length >= 3 && v.length <= 4) v = v.slice(0,2) + '.' + v.slice(2);
+  else if (v.length >= 5) v = v.slice(0,2) + '.' + v.slice(2,4) + '.' + v.slice(4,8);
+  el.value = v;
+
   if (!firedData[storeKey]) firedData[storeKey] = {};
   const empNum = el.dataset.emp;
   if (!firedData[storeKey][empNum]) firedData[storeKey][empNum] = { status: 'Уволен', date: '' };
