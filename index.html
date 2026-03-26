@@ -1173,6 +1173,8 @@ function normalizeStatus(status) {
   const s = String(status).trim();
   if (s === 'В ежегодном отпуске' || s === 'Отпуск без сохранения зарплаты') return 'Работает';
   if (s === 'Работает') return 'Работает';
+  // Нормализуем все варианты "уволен" к единому виду
+  if (s.toLowerCase().startsWith('уволен') || s.toLowerCase() === 'уволена') return 'Уволен';
   return s;
 }
 
