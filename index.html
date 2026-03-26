@@ -1027,7 +1027,10 @@ async function saveStoreToFirestore(storeKey) {
     const submitted = getSubmittedStores();
     const noChanges = JSON.parse(localStorage.getItem('noChangesStores') || '{}');
     const store = STORES[storeKey];
-    const firedEmps = store.employees.filter(e => getStatusOverride(storeKey, e.num) === 'Уволен');
+    const firedEmps = store.employees.filter(e => {
+      const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
+      return getStatusOverrideByKey(storeKey, empKey) === 'Уволен';
+    });
 
     await window._fsSetDoc(window._fsDoc(window._db, 'reports', storeKey), {
       storeKey,
@@ -1035,11 +1038,14 @@ async function saveStoreToFirestore(storeKey) {
       email: EMAIL_MAP[storeKey] || '',
       firedData: storeData,
       firedCount: firedEmps.length,
-      firedList: firedEmps.map(e => ({
-        name: e.name,
-        role: e.role,
-        date: getFiredValue(storeKey, e.num)
-      })),
+      firedList: firedEmps.map(e => {
+        const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
+        return {
+          name: e.name,
+          role: e.role,
+          date: getFiredValueByKey(storeKey, empKey)
+        };
+      }),
       submittedAt: submitted[storeKey] || null,
       noChangesAt: noChanges[storeKey] || null,
       updatedAt: new Date().toISOString()
@@ -1144,7 +1150,10 @@ function buildDirectorView(storeKey) {
 
   // Stats
   const total = store.employees.length;
-  const firedCount = store.employees.filter(e => getStatusOverride(storeKey, e.num) === 'Уволен').length;
+  const firedCount = store.employees.filter(e => {
+    const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
+    return getStatusOverrideByKey(storeKey, empKey) === 'Уволен';
+  }).length;
   const working = store.employees.filter(e => e.status === 'Работает').length;
   const other = total - working;
 
@@ -1167,6 +1176,14 @@ function getFiredValue(storeKey, empNum) {
   return (firedData[storeKey] && firedData[storeKey][empNum] && firedData[storeKey][empNum].date) || '';
 }
 
+function getStatusOverrideByKey(storeKey, empKey) {
+  return (firedData[storeKey] && firedData[storeKey][empKey] && firedData[storeKey][empKey].status) || null;
+}
+
+function getFiredValueByKey(storeKey, empKey) {
+  return (firedData[storeKey] && firedData[storeKey][empKey] && firedData[storeKey][empKey].date) || '';
+}
+
 // Нормализация статуса: отпуска считаются как "Работает"
 function normalizeStatus(status) {
   if (!status) return 'Работает';
@@ -1184,22 +1201,24 @@ function buildTable(storeKey) {
   tbody.innerHTML = '';
 
   store.employees.forEach(emp => {
-    const dateVal = getFiredValue(storeKey, emp.num);
-    const statusOverride = getStatusOverride(storeKey, emp.num);
-    // Применяем нормализацию к исходному статусу
+    // Уникальный ключ: если num=null используем имя
+    const empKey = emp.num !== null && emp.num !== undefined ? String(emp.num) : 'name_' + emp.name.replace(/\s+/g, '_');
+
+    const dateVal = getFiredValueByKey(storeKey, empKey);
+    const statusOverride = getStatusOverrideByKey(storeKey, empKey);
     const baseStatus = normalizeStatus(emp.status);
     const isFired = statusOverride === 'Уволен' || (!statusOverride && baseStatus === 'Уволен');
     const currentStatus = statusOverride || baseStatus;
 
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td><span class="emp-num">${emp.num}</span></td>
+      <td><span class="emp-num">${emp.num ?? '—'}</span></td>
       <td><strong>${emp.name}</strong></td>
       <td><span class="role-badge">${emp.role}</span></td>
       <td>
         <select
           class="status-select ${isFired ? 'fired' : 'working'}"
-          data-emp="${emp.num}"
+          data-emp="${empKey}"
           onchange="onStatusChange(this, '${storeKey}')"
         >
           <option value="Работает" ${currentStatus === 'Работает' ? 'selected' : ''}>● Работает</option>
@@ -1211,7 +1230,7 @@ function buildTable(storeKey) {
           class="fired-input ${dateVal ? 'has-value' : ''}"
           type="date"
           value="${dateVal}"
-          data-emp="${emp.num}"
+          data-emp="${empKey}"
           ${!isFired ? 'disabled' : ''}
           onchange="onFiredInput(this, '${storeKey}')"
         />
@@ -1257,7 +1276,10 @@ function onFiredInput(el, storeKey) {
 
 function updateFiredStat(storeKey) {
   const store = STORES[storeKey];
-  const firedCount = store.employees.filter(e => getStatusOverride(storeKey, e.num) === 'Уволен').length;
+  const firedCount = store.employees.filter(e => {
+    const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
+    return getStatusOverrideByKey(storeKey, empKey) === 'Уволен';
+  }).length;
   const statEl = document.getElementById('stat-fired');
   if (statEl) statEl.textContent = firedCount;
 }
@@ -1309,17 +1331,23 @@ function submitReport() {
 
   // Формируем данные для webhook
   const store  = STORES[currentStore];
-  const firedEmps = store.employees.filter(e => getStatusOverride(currentStore, e.num) === 'Уволен');
+  const firedEmps = store.employees.filter(e => {
+    const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
+    return getStatusOverrideByKey(currentStore, empKey) === 'Уволен';
+  });
   const payload = {
     store:     currentStore,
     director:  store.director,
     email:     EMAIL_MAP[currentStore] || '',
     firedCount: firedEmps.length,
-    firedList:  firedEmps.map(e => ({
-      name: e.name,
-      role: e.role,
-      date: getFiredValue(currentStore, e.num)
-    })),
+    firedList:  firedEmps.map(e => {
+      const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
+      return {
+        name: e.name,
+        role: e.role,
+        date: getFiredValueByKey(currentStore, empKey)
+      };
+    }),
     submittedAt: new Date().toLocaleString('ru-RU')
   };
 
