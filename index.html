@@ -873,7 +873,7 @@
 
   <div class="admin-grid">
     <aside class="admin-sidebar">
-      <div class="sidebar-title" id="sidebar-title">Магазины (100)</div>
+      <div class="sidebar-title" id="sidebar-title">Магазины (98)</div>
       <div style="display:flex;gap:6px;margin-bottom:0.75rem;">
         <button onclick="buildAdminSidebar()" style="flex:1;background:rgba(78,205,196,0.15);border:1px solid rgba(78,205,196,0.3);color:var(--accent2);border-radius:8px;padding:7px;font-size:0.75rem;cursor:pointer;font-family:var(--font-head);font-weight:600;">🔄 Обновить из Firebase</button>
       </div>
@@ -1944,7 +1944,7 @@ async function buildAdminSidebar() {
   const doneCount = STORE_KEYS.filter(k => submitted[k] || noChanges[k]).length;
   const titleEl = document.getElementById('sidebar-title');
   if (titleEl) {
-    titleEl.innerHTML = `Магазины &nbsp;<span style="color:#22c55e;">✅ ${doneCount}</span> <span style="color:#ef4444;">🔴 ${100 - doneCount}</span>`;
+    titleEl.innerHTML = `Магазины &nbsp;<span style="color:#22c55e;">✅ ${doneCount}</span> <span style="color:#ef4444;">🔴 ${STORE_KEYS.length - doneCount}</span>`;
   }
 
   STORE_KEYS.forEach(k => {
