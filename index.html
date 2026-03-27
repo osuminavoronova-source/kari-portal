@@ -1633,27 +1633,14 @@ async function exportXLSX() {
         const empName = typeof empB === 'string' ? empB.trim() : '';
         const empKey = empNum !== null ? String(empNum) : 'name_' + empName.replace(/\s+/g, '_');
 
-        // Берём статус только из портала через STORES empKey
+        // Статус: из firedData если директор вносил, иначе из исходного Excel
         let finalStatus = normalizeStatus(String(rowObj.c['4'] ?? ''));
-        if (storeKey) {
-          const storeData = STORES[storeKey];
-          if (storeData) {
-            const emp = storeData.employees.find(e => {
-              if (empNum !== null) return String(e.num) === String(empNum);
-              return e.name.trim() === empName;
-            });
-            if (emp) {
-              const realKey = emp.num !== null && emp.num !== undefined
-                ? String(emp.num)
-                : 'name_' + emp.name.replace(/\s+/g, '_');
-              const fd = firedData[storeKey] ? (firedData[storeKey][realKey] || firedData[storeKey][Number(realKey)] || null) : null;
-              if (fd && fd.status) {
-                finalStatus = normalizeStatus(fd.status);
-              } else {
-                finalStatus = normalizeStatus(String(emp.status || ''));
-              }
-            }
-          }
+        if (storeKey && firedData[storeKey]) {
+          const fd = firedData[storeKey][empKey]
+                  || firedData[storeKey][String(empNum)]
+                  || firedData[storeKey][Number(empKey)]
+                  || null;
+          if (fd && fd.status) finalStatus = normalizeStatus(fd.status);
         }
 
         if (finalStatus === 'Работает') workingCount++;
@@ -1744,34 +1731,19 @@ async function exportXLSX() {
       const empName = typeof c['2'] === 'string' ? c['2'].trim() : '';
       const empKey = empNum !== null ? String(empNum) : 'name_' + empName.replace(/\s+/g, '_');
 
-      // Берём ТОЛЬКО из портала (Firebase)
-      let finalStatus = '';
+      // Статус и дата из портала (firedData)
+      let finalStatus = normalizeStatus(String(c['4'] ?? '')); // исходный статус из Excel
       let date = '';
-      if (sk) {
-        // Находим сотрудника в STORES чтобы получить его реальный empKey
-        const storeData = STORES[sk];
-        if (storeData) {
-          const emp = storeData.employees.find(e => {
-            if (empNum !== null) return String(e.num) === String(empNum);
-            return e.name.trim() === empName;
-          });
-          if (emp) {
-            const realKey = emp.num !== null && emp.num !== undefined
-              ? String(emp.num)
-              : 'name_' + emp.name.replace(/\s+/g, '_');
-            // Статус: из firedData если есть, иначе нормализованный исходный
-            const fd = firedData[sk] ? (firedData[sk][realKey] || firedData[sk][Number(realKey)] || null) : null;
-            if (fd && fd.status) {
-              finalStatus = normalizeStatus(fd.status);
-              date = fd.date || '';
-            } else {
-              // Нет данных в портале — берём исходный статус из Excel
-              finalStatus = normalizeStatus(String(emp.status || ''));
-            }
-          }
+      if (sk && firedData[sk]) {
+        const fd = firedData[sk][empKey]
+                || firedData[sk][String(empNum)]
+                || firedData[sk][Number(empKey)]
+                || null;
+        if (fd && fd.status) {
+          finalStatus = normalizeStatus(fd.status);
+          date = fd.date || '';
         }
       }
-      if (!finalStatus) finalStatus = normalizeStatus(String(c['4'] ?? ''));
 
       values[3] = finalStatus;
       values[4] = (finalStatus === 'Уволен') ? date : '';
