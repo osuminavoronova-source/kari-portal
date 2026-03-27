@@ -1568,11 +1568,16 @@ async function exportXLSX() {
   const storeOverrides = {};
   STORE_KEYS.forEach(storeKey => {
     STORES[storeKey].employees.forEach(emp => {
-      const statusOverride = getStatusOverride(storeKey, emp.num);
-      const date = getFiredValue(storeKey, emp.num);
-      if (statusOverride || date) {
+      const empKey = emp.num !== null && emp.num !== undefined ? String(emp.num) : 'name_' + emp.name.replace(/\s+/g, '_');
+      const statusOverride = getStatusOverrideByKey(storeKey, empKey);
+      const date = getFiredValueByKey(storeKey, empKey);
+      const baseStatus = normalizeStatus(emp.status);
+      const effectiveStatus = statusOverride || baseStatus;
+      if (statusOverride || date || effectiveStatus === 'Уволен') {
         if (!storeOverrides[storeKey]) storeOverrides[storeKey] = {};
-        storeOverrides[storeKey][emp.num] = { statusOverride, date };
+        // Сохраняем и под числовым ключом и под empKey
+        storeOverrides[storeKey][emp.num] = { statusOverride: effectiveStatus, date };
+        storeOverrides[storeKey][empKey] = { statusOverride: effectiveStatus, date };
       }
     });
   });
@@ -1952,19 +1957,19 @@ async function buildAdminSidebar() {
     document.getElementById('webhook-status').textContent = '✅ Сохранён: ' + savedUrl.substring(0, 40) + '...';
   }
 
-  // Загружаем актуальные данные из Firestore
+  // Загружаем актуальные данные из Firestore — только Firebase, без смешивания с localStorage
   let firestoreData = {};
   if (window._firebaseReady) {
     firestoreData = await loadAllFromFirestore();
-    // Синхронизируем localStorage из Firestore
-    const submitted = getSubmittedStores();
-    const noChanges = JSON.parse(localStorage.getItem('noChangesStores') || '{}');
+    // Полностью сбрасываем firedData и берём только из Firebase
+    firedData = {};
+    const submitted = {};
+    const noChanges = {};
     Object.entries(firestoreData).forEach(([k, d]) => {
       if (d.submittedAt) submitted[k] = d.submittedAt;
       if (d.noChangesAt) noChanges[k] = d.noChangesAt;
       if (d.firedData) {
-        if (!firedData[k]) firedData[k] = {};
-        Object.assign(firedData[k], d.firedData);
+        firedData[k] = d.firedData;
       }
     });
     localStorage.setItem('submittedStores', JSON.stringify(submitted));
