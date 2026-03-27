@@ -1032,7 +1032,8 @@ async function saveStoreToFirestore(storeKey) {
       return getStatusOverrideByKey(storeKey, empKey) === 'Уволен';
     });
 
-    await window._fsSetDoc(window._fsDoc(window._db, 'reports', storeKey), {
+    const safeId = storeKey.replace(/\//g, '_').replace(/\\/g, '_');
+    await window._fsSetDoc(window._fsDoc(window._db, 'reports', safeId), {
       storeKey,
       director: store.director,
       email: EMAIL_MAP[storeKey] || '',
@@ -1067,7 +1068,16 @@ async function loadAllFromFirestore() {
       );
     });
     const result = {};
-    snapshot.forEach(d => { result[d.id] = d.data(); });
+    // Создаём маппинг safeId -> storeKey
+    const safeToReal = {};
+    STORE_KEYS.forEach(k => {
+      const safeId = k.replace(/\//g, '_').replace(/\\/g, '_');
+      safeToReal[safeId] = k;
+    });
+    snapshot.forEach(d => {
+      const realKey = safeToReal[d.id] || d.id;
+      result[realKey] = d.data();
+    });
     return result;
   } catch(e) {
     console.warn('⚠️ Firestore load error:', e);
@@ -1148,6 +1158,33 @@ function buildDirectorView(storeKey) {
   document.getElementById('header-store-name').textContent = storeKey;
   document.getElementById('header-director').textContent = store.director;
 
+  // Загружаем данные из Firebase для этого магазина
+  loadStoreFromFirestore(storeKey).then(() => {
+    _renderDirectorView(storeKey);
+  });
+}
+
+async function loadStoreFromFirestore(storeKey) {
+  if (!window._firebaseReady) return;
+  try {
+    const safeId = storeKey.replace(/\//g, '_').replace(/\\/g, '_');
+    const docRef = window._fsDoc(window._db, 'reports', safeId);
+    const snap = await window._fsGetDoc(docRef);
+    if (snap.exists && snap.exists()) {
+      const d = snap.data();
+      if (d.firedData) {
+        if (!firedData[storeKey]) firedData[storeKey] = {};
+        Object.assign(firedData[storeKey], d.firedData);
+        saveToPersistent();
+      }
+    }
+  } catch(e) {
+    console.warn('⚠️ Firestore load store error:', e);
+  }
+}
+
+function _renderDirectorView(storeKey) {
+  const store = STORES[storeKey];
   // Stats
   const total = store.employees.length;
   const firedCount = store.employees.filter(e => {
@@ -2009,7 +2046,17 @@ function openAdminStore(storeKey) {
     const statusOverride = getStatusOverrideByKey(storeKey, empKey);
     const baseStatus = normalizeStatus(emp.status);
     const status = statusOverride || baseStatus;
-    const date = getFiredValueByKey(storeKey, empKey) || '—';
+    const rawDate = getFiredValueByKey(storeKey, empKey) || '';
+    // Конвертируем формат даты: ГГГГ-ММ-ДД → ДД.ММ.ГГГГ
+    let date = '—';
+    if (rawDate) {
+      if (/^\d{4}-\d{2}-\d{2}$/.test(rawDate)) {
+        const [y, m, d] = rawDate.split('-');
+        date = `${d}.${m}.${y}`;
+      } else {
+        date = rawDate;
+      }
+    }
     const isFired = status === 'Уволен';
     return `<tr>
       <td><span class="emp-num">${emp.num ?? '—'}</span></td>
