@@ -1097,14 +1097,18 @@ function populateStoreSelect() {
 }
 
 function toggleLoginType() {
-  const type = document.getElementById('login-type').value;
-  currentType = type;
+  const sel = document.getElementById('login-type');
+  // Используем индекс (0=директор, 1=админ) вместо value — защита от перевода браузером
+  const isAdmin = sel.selectedIndex === 1;
+  currentType = isAdmin ? 'admin' : 'director';
   const wrap = document.getElementById('store-select-wrap');
-  wrap.style.display = type === 'admin' ? 'none' : 'block';
+  wrap.style.display = isAdmin ? 'none' : 'block';
 }
 
 function login() {
-  const type     = document.getElementById('login-type').value;
+  const sel      = document.getElementById('login-type');
+  const isAdmin  = sel.selectedIndex === 1;
+  const type     = isAdmin ? 'admin' : 'director';
   const password = document.getElementById('login-password').value;
 
   if (type === 'admin') {
