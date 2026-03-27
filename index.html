@@ -1789,15 +1789,23 @@ async function exportXLSX() {
   // --- PASS 2: set SUM formulas for division rows C, D, E and percent formulas F, G ---
   const divSheetRows = []; // sheet row numbers of all DC division rows (for КАРИ КЗ)
 
-  ws.eachRow(row => {
-    const aCell = row.getCell(1);
-    const aVal  = aCell.value ? String(aCell.value).trim() : '';
-    if (/^DC\d+/.test(aVal) && divStoreSheetRows[aVal] && divStoreSheetRows[aVal].length > 0) {
-      const refs = divStoreSheetRows[aVal];
+  // Найдём строки подразделений по номеру строки листа
+  Object.entries(divStoreSheetRows).forEach(([divName, storeSheetRowNums]) => {
+    if (!storeSheetRowNums || storeSheetRowNums.length === 0) return;
+
+    // Найдём строку подразделения в листе — ищем по содержимому ячейки A
+    ws.eachRow(row => {
+      const aVal = row.getCell(1).value ? String(row.getCell(1).value).trim() : '';
+      if (aVal !== divName) return;
+
+      const refs = storeSheetRowNums;
       const sumC = refs.map(r => `C${r}`).join(',');
       const sumD = refs.map(r => `D${r}`).join(',');
       const sumE = refs.map(r => `E${r}`).join(',');
-      const r    = row.number;
+      const sumB = refs.map(r => `B${r}`).join(',');
+      const r = row.number;
+
+      row.getCell(2).value = { formula: `SUM(${sumB})` };
       row.getCell(3).value = { formula: `SUM(${sumC})` };
       row.getCell(4).value = { formula: `SUM(${sumD})` };
       row.getCell(5).value = { formula: `SUM(${sumE})` };
@@ -1806,13 +1814,13 @@ async function exportXLSX() {
       row.getCell(6).numFmt = '0.00%';
       row.getCell(7).numFmt = '0.00%';
       divSheetRows.push(r);
-      // Re-apply style
+
       row.eachCell({ includeEmpty: true }, cell => {
         cell.font   = { name: 'Calibri', size: 9 };
         cell.border = allBorders;
         cell.fill   = { type: 'pattern', pattern: 'solid', fgColor: { argb: COLOR_ORANGE } };
       });
-    }
+    });
   });
 
   // --- PASS 3: КАРИ КЗ row — sum across all division rows ---
