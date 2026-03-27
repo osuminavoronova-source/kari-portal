@@ -1216,12 +1216,17 @@ function getFiredValue(storeKey, empNum) {
 function getStatusOverrideByKey(storeKey, empKey) {
   if (!firedData[storeKey]) return null;
   // Проверяем оба варианта ключа: строковый и числовой
+  // Игнорируем ключи которые могли появиться из-за перевода браузера
+  const INVALID_KEYS = ['null', 'undefined', 'нулевой', 'нуль', 'нет'];
+  if (INVALID_KEYS.includes(String(empKey).toLowerCase())) return null;
   const d = firedData[storeKey][empKey] || firedData[storeKey][Number(empKey)] || null;
   return (d && d.status) || null;
 }
 
 function getFiredValueByKey(storeKey, empKey) {
   if (!firedData[storeKey]) return '';
+  const INVALID_KEYS = ['null', 'undefined', 'нулевой', 'нуль', 'нет'];
+  if (INVALID_KEYS.includes(String(empKey).toLowerCase())) return '';
   const d = firedData[storeKey][empKey] || firedData[storeKey][Number(empKey)] || null;
   return (d && d.date) || '';
 }
@@ -1291,6 +1296,8 @@ function onStatusChange(el) {
   const storeKey = el.dataset.store;
   if (!firedData[storeKey]) firedData[storeKey] = {};
   const empNum = el.dataset.emp;
+  // Защита от ключей появившихся из-за перевода браузера
+  if (!empNum || empNum === 'null' || empNum === 'undefined' || empNum === 'нулевой') return;
   if (!firedData[storeKey][empNum]) firedData[storeKey][empNum] = { status: '', date: '' };
   firedData[storeKey][empNum].status = el.value;
   const isFired = el.value === 'Уволен';
@@ -1314,7 +1321,9 @@ function onStatusChange(el) {
 
 function onFiredInput(el) {
   const storeKey = el.dataset.store;
-  // Автоматическая маска даты ДД.ММ.ГГГГ
+  // Защита от ключей появившихся из-за перевода браузера
+  const empNum = el.dataset.emp;
+  if (!empNum || empNum === 'null' || empNum === 'undefined' || empNum === 'нулевой') return;
   let v = el.value.replace(/\D/g, '');
   if (v.length >= 3 && v.length <= 4) v = v.slice(0,2) + '.' + v.slice(2);
   else if (v.length >= 5) v = v.slice(0,2) + '.' + v.slice(2,4) + '.' + v.slice(4,8);
