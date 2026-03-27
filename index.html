@@ -1632,19 +1632,16 @@ async function exportXLSX() {
         const empNum = typeof empA === 'number' ? empA : null;
         const empName = typeof empB === 'string' ? empB.trim() : '';
         const empKey = empNum !== null ? String(empNum) : 'name_' + empName.replace(/\s+/g, '_');
-        let status = rowObj.c['4'] ?? '';
-        let date = '';
-        // Проверяем override по empKey (для сотрудников с и без num)
-        if (storeKey && storeOverrides[storeKey]) {
-          const ov = storeOverrides[storeKey][empKey] || storeOverrides[storeKey][empNum] || null;
-          if (ov) {
-            status = ov.statusOverride || status;
-            date   = ov.date || '';
-          }
+
+        // Берём статус из firedData (портал), иначе из исходных данных
+        let finalStatus = normalizeStatus(String(rowObj.c['4'] ?? ''));
+        if (storeKey && firedData[storeKey]) {
+          const fd = firedData[storeKey][empKey] || firedData[storeKey][empNum] || firedData[storeKey][Number(empKey)] || null;
+          if (fd && fd.status) finalStatus = normalizeStatus(fd.status);
         }
-        const normStatus = normalizeStatus(String(status));
-        if (normStatus === 'Работает') workingCount++;
-        if (normStatus === 'Уволен') firedCount++; // считаем по статусу, не по дате
+
+        if (finalStatus === 'Работает') workingCount++;
+        if (finalStatus === 'Уволен') firedCount++;
       }
     });
     storeEmpCount[storeR]     = count;
@@ -1726,30 +1723,28 @@ async function exportXLSX() {
       values[0] = a;
       values[1] = c['2'] ?? ''; // ФИО
       values[2] = c['3'] ?? ''; // Должность
-      let status = c['4'] ?? '';
       const sk = STORE_KEYS.find(k => k.startsWith((currentStoreKey||'').substring(0, 10)));
       const empNum = typeof a === 'number' ? a : null;
       const empName = typeof c['2'] === 'string' ? c['2'].trim() : '';
       const empKey = empNum !== null ? String(empNum) : 'name_' + empName.replace(/\s+/g, '_');
 
+      // Берём статус и дату из firedData (данные из портала/Firebase)
+      let portalStatus = '';
       let date = '';
-      if (sk) {
-        // Берём дату из firedData напрямую (самый надёжный источник)
-        date = getFiredValueByKey(sk, empKey) || getFiredValueByKey(sk, String(empNum)) || '';
-        // Берём статус override
-        const ov = storeOverrides[sk] ? (storeOverrides[sk][empKey] || storeOverrides[sk][empNum] || null) : null;
-        if (ov && ov.statusOverride) {
-          status = ov.statusOverride;
-        } else {
-          status = normalizeStatus(String(status));
+      if (sk && firedData[sk]) {
+        const fd = firedData[sk][empKey] || firedData[sk][empNum] || firedData[sk][Number(empKey)] || null;
+        if (fd) {
+          portalStatus = fd.status || '';
+          date = fd.date || '';
         }
-      } else {
-        status = normalizeStatus(String(status));
       }
 
-      values[3] = status;
-      // Дата в колонке 5 — показываем для всех уволенных
-      values[4] = (status === 'Уволен') ? date : '';
+      // Финальный статус: из портала если есть, иначе из исходных данных Excel
+      let baseStatus = normalizeStatus(String(c['4'] ?? ''));
+      let finalStatus = portalStatus ? normalizeStatus(portalStatus) : baseStatus;
+
+      values[3] = finalStatus; // Колонка 4: статус
+      values[4] = (finalStatus === 'Уволен') ? date : ''; // Колонка 5: дата увольнения
     }
 
     const wsRow = ws.addRow(values);
