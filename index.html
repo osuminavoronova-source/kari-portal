@@ -1177,11 +1177,16 @@ function getFiredValue(storeKey, empNum) {
 }
 
 function getStatusOverrideByKey(storeKey, empKey) {
-  return (firedData[storeKey] && firedData[storeKey][empKey] && firedData[storeKey][empKey].status) || null;
+  if (!firedData[storeKey]) return null;
+  // Проверяем оба варианта ключа: строковый и числовой
+  const d = firedData[storeKey][empKey] || firedData[storeKey][Number(empKey)] || null;
+  return (d && d.status) || null;
 }
 
 function getFiredValueByKey(storeKey, empKey) {
-  return (firedData[storeKey] && firedData[storeKey][empKey] && firedData[storeKey][empKey].date) || '';
+  if (!firedData[storeKey]) return '';
+  const d = firedData[storeKey][empKey] || firedData[storeKey][Number(empKey)] || null;
+  return (d && d.date) || '';
 }
 
 // Нормализация статуса: отпуска считаются как "Работает"
@@ -1210,6 +1215,7 @@ function buildTable(storeKey) {
     const isFired = statusOverride === 'Уволен' || (!statusOverride && baseStatus === 'Уволен');
     const currentStatus = statusOverride || baseStatus;
 
+    const safeKey = storeKey.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><span class="emp-num">${emp.num ?? '—'}</span></td>
@@ -1219,7 +1225,8 @@ function buildTable(storeKey) {
         <select
           class="status-select ${isFired ? 'fired' : 'working'}"
           data-emp="${empKey}"
-          onchange="onStatusChange(this, '${storeKey}')"
+          data-store="${safeKey}"
+          onchange="onStatusChange(this)"
         >
           <option value="Работает" ${currentStatus === 'Работает' ? 'selected' : ''}>● Работает</option>
           <option value="Уволен" ${isFired ? 'selected' : ''}>✕ Уволен</option>
@@ -1232,9 +1239,10 @@ function buildTable(storeKey) {
           placeholder="ДД.ММ.ГГГГ"
           value="${dateVal}"
           data-emp="${empKey}"
+          data-store="${safeKey}"
           maxlength="10"
           ${!isFired ? 'disabled' : ''}
-          oninput="onFiredInput(this, '${storeKey}')"
+          oninput="onFiredInput(this)"
         />
       </td>
     `;
@@ -1242,7 +1250,8 @@ function buildTable(storeKey) {
   });
 }
 
-function onStatusChange(el, storeKey) {
+function onStatusChange(el) {
+  const storeKey = el.dataset.store;
   if (!firedData[storeKey]) firedData[storeKey] = {};
   const empNum = el.dataset.emp;
   if (!firedData[storeKey][empNum]) firedData[storeKey][empNum] = { status: '', date: '' };
@@ -1250,22 +1259,24 @@ function onStatusChange(el, storeKey) {
   const isFired = el.value === 'Уволен';
   el.className = `status-select ${isFired ? 'fired' : 'working'}`;
 
-  // Enable/disable date input in same row
-  const row = el.closest('tr');
-  const dateInput = row.querySelector('.fired-input');
-  dateInput.disabled = !isFired;
-  if (!isFired) {
-    dateInput.value = '';
-    firedData[storeKey][empNum].date = '';
-    dateInput.classList.remove('has-value');
+  // Находим поле даты по data-emp
+  const dateInput = document.querySelector(`.fired-input[data-emp="${empNum}"]`);
+  if (dateInput) {
+    dateInput.disabled = !isFired;
+    if (!isFired) {
+      dateInput.value = '';
+      firedData[storeKey][empNum].date = '';
+      dateInput.classList.remove('has-value');
+    }
   }
 
   updateFiredStat(storeKey);
-  saveToPersistent(); // автосохранение
-  saveStoreToFirestore(storeKey); // синхронизация с Firestore
+  saveToPersistent();
+  saveStoreToFirestore(storeKey);
 }
 
-function onFiredInput(el, storeKey) {
+function onFiredInput(el) {
+  const storeKey = el.dataset.store;
   // Автоматическая маска даты ДД.ММ.ГГГГ
   let v = el.value.replace(/\D/g, '');
   if (v.length >= 3 && v.length <= 4) v = v.slice(0,2) + '.' + v.slice(2);
@@ -1278,8 +1289,8 @@ function onFiredInput(el, storeKey) {
   firedData[storeKey][empNum].date = el.value;
   el.classList.toggle('has-value', !!el.value);
   updateFiredStat(storeKey);
-  saveToPersistent(); // автосохранение
-  saveStoreToFirestore(storeKey); // синхронизация с Firestore
+  saveToPersistent();
+  saveStoreToFirestore(storeKey);
 }
 
 function updateFiredStat(storeKey) {
