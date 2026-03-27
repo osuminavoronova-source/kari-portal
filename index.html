@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" translate="no">
 <head>
 <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="Content-Language" content="ru">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Портал директоров — Отчёт по текучке</title>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
@@ -1300,14 +1302,12 @@ function onStatusChange(el) {
   const storeKey = el.dataset.store;
   if (!firedData[storeKey]) firedData[storeKey] = {};
   const empNum = el.dataset.emp;
-  // Защита от ключей появившихся из-за перевода браузера
   if (!empNum || empNum === 'null' || empNum === 'undefined' || empNum === 'нулевой') return;
   if (!firedData[storeKey][empNum]) firedData[storeKey][empNum] = { status: '', date: '' };
   firedData[storeKey][empNum].status = el.value;
   const isFired = el.value === 'Уволен';
   el.className = `status-select ${isFired ? 'fired' : 'working'}`;
 
-  // Находим поле даты по data-emp
   const dateInput = document.querySelector(`.fired-input[data-emp="${empNum}"]`);
   if (dateInput) {
     dateInput.disabled = !isFired;
@@ -1325,7 +1325,6 @@ function onStatusChange(el) {
 
 function onFiredInput(el) {
   const storeKey = el.dataset.store;
-  // Защита от ключей появившихся из-за перевода браузера
   const empNum = el.dataset.emp;
   if (!empNum || empNum === 'null' || empNum === 'undefined' || empNum === 'нулевой') return;
   let v = el.value.replace(/\D/g, '');
@@ -1334,7 +1333,6 @@ function onFiredInput(el) {
   el.value = v;
 
   if (!firedData[storeKey]) firedData[storeKey] = {};
-  const empNum = el.dataset.emp;
   if (!firedData[storeKey][empNum]) firedData[storeKey][empNum] = { status: 'Уволен', date: '' };
   firedData[storeKey][empNum].date = el.value;
   el.classList.toggle('has-value', !!el.value);
