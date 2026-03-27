@@ -1215,7 +1215,7 @@ function buildTable(storeKey) {
     const isFired = statusOverride === 'Уволен' || (!statusOverride && baseStatus === 'Уволен');
     const currentStatus = statusOverride || baseStatus;
 
-    const safeKey = storeKey.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    const safeKey = storeKey.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td><span class="emp-num">${emp.num ?? '—'}</span></td>
@@ -1949,7 +1949,11 @@ async function buildAdminSidebar() {
 
   STORE_KEYS.forEach(k => {
     const store = STORES[k];
-    const firedCount  = store.employees.filter(e => getStatusOverride(k, e.num) === 'Уволен').length;
+    const firedCount = store.employees.filter(e => {
+      const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
+      const override = getStatusOverrideByKey(k, empKey);
+      return override === 'Уволен' || (!override && normalizeStatus(e.status) === 'Уволен');
+    }).length;
     const isSubmitted = !!submitted[k];
     const isNoChange  = !!noChanges[k];
     const submittedAt = isSubmitted ? new Date(submitted[k]).toLocaleDateString('ru-RU') : null;
@@ -1993,16 +1997,22 @@ function openAdminStore(storeKey) {
   const store = STORES[storeKey];
   const view = document.getElementById('admin-store-view');
 
-  const firedCount = store.employees.filter(e => getStatusOverride(storeKey, e.num) === 'Уволен').length;
+  const firedCount = store.employees.filter(e => {
+    const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
+    const override = getStatusOverrideByKey(storeKey, empKey);
+    return override === 'Уволен' || (!override && normalizeStatus(e.status) === 'Уволен');
+  }).length;
   const total = store.employees.length;
 
   let rows = store.employees.map(emp => {
-    const statusOverride = getStatusOverride(storeKey, emp.num);
-    const status = statusOverride || emp.status;
-    const date = getFiredValue(storeKey, emp.num) || '—';
+    const empKey = emp.num !== null && emp.num !== undefined ? String(emp.num) : 'name_' + emp.name.replace(/\s+/g, '_');
+    const statusOverride = getStatusOverrideByKey(storeKey, empKey);
+    const baseStatus = normalizeStatus(emp.status);
+    const status = statusOverride || baseStatus;
+    const date = getFiredValueByKey(storeKey, empKey) || '—';
     const isFired = status === 'Уволен';
     return `<tr>
-      <td><span class="emp-num">${emp.num}</span></td>
+      <td><span class="emp-num">${emp.num ?? '—'}</span></td>
       <td><strong>${emp.name}</strong></td>
       <td><span class="role-badge">${emp.role}</span></td>
       <td style="color:${isFired ? 'var(--danger)' : 'var(--success)'}">${isFired ? '✕ Уволен' : '● Работает'}</td>
