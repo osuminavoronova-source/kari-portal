@@ -77,28 +77,28 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    position: относительное;
+    position: relative;
     overflow: скрыто;
   }
 
   #login-screen::before {
     content: '';
-    position: абсолютное;
+    position: absolute;
     верхняя border: -30%;
     right: -20%;
-    width: 600 пикселей;
-    height: 600 пикселей;
+    width: 600px;
+    height: 600px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(232,197,71,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
   #login-screen::after {
     content: '';
-    position: абсолютное;
+    position: absolute;
     нижняя border: -20%;
     left: -10%;
-    width: 500 пикселей;
-    height: 500 пикселей;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(78,205,196,0.08) 0%, transparent 70%);
     pointer-events: none;
@@ -111,7 +111,7 @@
     padding: 3rem 2.5rem;
     width: 100%;
     max-width: 460px;
-    position: относительное;
+    position: relative;
     z-index: 1;
     box-shadow: 0 30px 80px rgba(0,0,0,0.5);
   }
@@ -119,7 +119,7 @@
   .logo-badge {
     display: inline-flex;
     align-items: center;
-    gap: 10 пикселей;
+    gap: 10px;
     background: rgba(232,197,71,0.1);
     border: 1px solid rgba(232,197,71,0.3);
     border-radius: 50px;
@@ -153,7 +153,7 @@
     padding: 1rem 1.2rem;
     margin-bottom: 2rem;
     display: flex;
-    gap: 12 пикселей;
+    gap: 12px;
     align-items: flex-start;
   }
   .notif-icon { font-size: 1.4rem; flex-shrink: 0; }
@@ -188,13 +188,13 @@
   select option { background: #1d1f2a; }
 
   .select-wrap {
-    position: относительное;
+    position: relative;
     margin-bottom: 1.5rem;
   }
   .select-wrap::after {
     content: '▼';
-    position: абсолютное;
-    right: 14 пикселей;
+    position: absolute;
+    right: 14px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--muted);
@@ -212,7 +212,7 @@
     font-family: var(--font-head);
     font-size: 0.85rem;
     font-weight: 600;
-    cursor: указатель;
+    cursor: pointer;
     letter-spacing: 0.05em;
     transition: все 0,2 с;
   }
@@ -272,7 +272,7 @@
     border-radius: 8px;
     padding: 6px 14px;
     font-size: 0.8rem;
-    cursor: указатель;
+    cursor: pointer;
     font-family: var(--font-body);
     transition: все 0,2 с;
   }
@@ -296,7 +296,7 @@
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
-    gap: 14 пикселей;
+    gap: 14px;
     animation: slideDown 0.4s ease;
   }
   @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -349,11 +349,11 @@
     font-family: var(--font-head);
     font-size: 0.75rem;
     font-weight: 600;
-    cursor: указатель;
+    cursor: pointer;
     transition: все 0,2 с;
     display: flex;
     align-items: center;
-    gap: 8 пикселей;
+    gap: 8px;
   }
   .btn-save-all:hover { background: #f0d060; }
   .btn-save-all.saved { background: var(--success); color: white; }
@@ -409,7 +409,7 @@
   .status-chip {
     display: inline-flex;
     align-items: center;
-    gap: 5 пикселей;
+    gap: 5px;
     border-radius: 50px;
     padding: 3px 10px;
     font-size: 0.78rem;
@@ -450,7 +450,7 @@
     font-size: 0.82rem;
     font-family: var(--font-body);
     outline: отсутствует;
-    cursor: указатель;
+    cursor: pointer;
     appearance: отсутствует;
     -webkit-appearance: none;
     transition: border-color 0.2s, background 0.2s;
@@ -490,7 +490,7 @@
     padding: 10px 22px;
     font-family: var(--font-head);
     font-size: 0.75rem;
-    cursor: указатель;
+    cursor: pointer;
     transition: все 0,2 с;
     white-space: nowrap;
     flex-shrink: 0;
@@ -550,9 +550,9 @@
   .store-list-item {
     padding: 10px 12px;
     border-radius: 10px;
-    cursor: указатель;
+    cursor: pointer;
     margin-bottom: 4px;
-    transition: фон 0,15 с;
+    transition: background 0.15s;
     border: 1px solid transparent;
   }
   .store-list-item:hover { background: rgba(255,255,255,0.04); }
@@ -586,16 +586,16 @@
   }
 
   .search-box {
-    position: относительное;
+    position: relative;
     margin-bottom: 1rem;
   }
   .search-box input {
     padding-left: 40px;
   }
   .search-box::before {
-    контент: '🔍';
-    position: абсолютное;
-    left: 12 пикселей;
+    content: '🔍';
+    position: absolute;
+    left: 12px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 0.9rem;
