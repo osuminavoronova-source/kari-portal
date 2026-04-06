@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru" translate="no">
-<голова>
+<head>
 <meta charset="UTF-8">
   <meta name="google" content="notranslate">
   <meta http-equiv="Content-Language" content="ru">
@@ -42,28 +42,28 @@
 </script>
 
 <style>
-  :корень {
+  :root {
     --bg: #0e0f14;
-    --поверхность: #161820;
+    --surface: #161820;
     --card: #1d1f2a;
     --border: #2a2d3e;
     --accent: #e8c547;
     --accent2: #4ecdc4;
-    --опасность: #ff6b6b;
-    --успех: #6bcb77;
-    --текст: #e8eaf2;
-    --заглушено: #6b7090;
+    --danger: #ff6b6b;
+    --success: #6bcb77;
+    --text: #e8eaf2;
+    --muted: #6b7090;
     --font-head: 'Unbounded', sans-serif;
-    --font-body: «Голос Текст», без засечек;
+    --font-body: 'Golos Text', без засечек;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   тело {
-    фон: var(--bg);
-    цвет: var(--text);
-    семейство шрифтов: var (--font-body);
-    минимальная высота: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    минимальная height: 100vh;
   }
 
   /* УПРАВЛЕНИЕ ЭКРАНОМ */
@@ -72,54 +72,54 @@
 
   /* ── ЭКРАН ВХОДА ── */
   #login-screen {
-    минимальная высота: 100vh;
+    минимальная height: 100vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    положение: относительное;
-    переполнение: скрыто;
+    position: относительное;
+    overflow: скрыто;
   }
 
   #login-screen::before {
-    содержание: '';
-    положение: абсолютное;
-    верхняя граница: -30%;
-    справа: -20%;
-    ширина: 600 пикселей;
-    высота: 600 пикселей;
-    радиус границы: 50%;
+    content: '';
+    position: абсолютное;
+    верхняя border: -30%;
+    right: -20%;
+    width: 600 пикселей;
+    height: 600 пикселей;
+    border-radius: 50%;
     background: radial-gradient(circle, rgba(232,197,71,0.12) 0%, transparent 70%);
     pointer-events: none;
   }
   #login-screen::after {
-    содержание: '';
-    положение: абсолютное;
-    нижняя граница: -20%;
-    слева: -10%;
-    ширина: 500 пикселей;
-    высота: 500 пикселей;
-    радиус границы: 50%;
+    content: '';
+    position: абсолютное;
+    нижняя border: -20%;
+    left: -10%;
+    width: 500 пикселей;
+    height: 500 пикселей;
+    border-radius: 50%;
     background: radial-gradient(circle, rgba(78,205,196,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
 
   .login-box {
     background: var(--card);
-    граница: сплошная 1 пиксель var(--border);
+    border: сплошная 1 пиксель var(--border);
     border-radius: 20px;
     padding: 3rem 2.5rem;
-    ширина: 100%;
+    width: 100%;
     max-width: 460px;
-    положение: относительное;
-    z-индекс: 1;
+    position: относительное;
+    z-index: 1;
     box-shadow: 0 30px 80px rgba(0,0,0,0.5);
   }
 
   .logo-badge {
     display: inline-flex;
     align-items: center;
-    зазор: 10 пикселей;
+    gap: 10 пикселей;
     background: rgba(232,197,71,0.1);
     border: 1px solid rgba(232,197,71,0.3);
     border-radius: 50px;
@@ -134,15 +134,15 @@
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 0.5rem;
-    цвет: var(--text);
+    color: var(--text);
   }
   .login-box h1 em { color: var(--accent); font-style: normal; }
 
   .login-subtitle {
-    цвет: var(--muted);
+    color: var(--muted);
     font-size: 0.9rem;
     margin-bottom: 2rem;
-    межстрочный интервал: 1,5;
+    line-height: 1,5;
   }
 
   /* Баннер уведомления */
@@ -153,7 +153,7 @@
     padding: 1rem 1.2rem;
     margin-bottom: 2rem;
     display: flex;
-    зазор: 12 пикселей;
+    gap: 12 пикселей;
     align-items: flex-start;
   }
   .notif-icon { font-size: 1.4rem; flex-shrink: 0; }
@@ -164,57 +164,57 @@
     display: block;
     font-size: 0.8rem;
     font-weight: 600;
-    цвет: var(--muted);
+    color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     margin-bottom: 8px;
   }
 
   выбрать, ввести {
-    ширина: 100%;
-    фон: var(--surface);
-    граница: сплошная 1 пиксель var(--border);
+    width: 100%;
+    background: var(--surface);
+    border: сплошная 1 пиксель var(--border);
     border-radius: 10px;
-    цвет: var(--text);
+    color: var(--text);
     padding: 12px 16px;
-    семейство шрифтов: var (--font-body);
+    font-family: var(--font-body);
     font-size: 0.95rem;
-    план: отсутствует;
+    outline: отсутствует;
     transition: border-color 0.2s;
-    Внешний вид: отсутствует;
+    appearance: отсутствует;
     -webkit-appearance: none;
   }
   select:focus, input:focus { border-color: var(--accent); }
-  выберите вариант { background: #1d1f2a; }
+  select option { background: #1d1f2a; }
 
   .select-wrap {
-    положение: относительное;
+    position: относительное;
     margin-bottom: 1.5rem;
   }
   .select-wrap::after {
-    содержимое: '▼';
-    положение: абсолютное;
-    справа: 14 пикселей;
-    верхний предел: 50%;
+    content: '▼';
+    position: абсолютное;
+    right: 14 пикселей;
+    top: 50%;
     transform: translateY(-50%);
-    цвет: var(--muted);
+    color: var(--muted);
     font-size: 0.7rem;
     pointer-events: none;
   }
 
   .btn-primary {
-    ширина: 100%;
+    width: 100%;
     background: var(--accent);
-    цвет: #0e0f14;
-    граница: отсутствует;
+    color: #0e0f14;
+    border: отсутствует;
     border-radius: 10px;
     padding: 14px;
     font-family: var(--font-head);
     font-size: 0.85rem;
     font-weight: 600;
-    курсор: указатель;
+    cursor: указатель;
     letter-spacing: 0.05em;
-    переход: все 0,2 с;
+    transition: все 0,2 с;
   }
   .btn-primary:hover { background: #f0d060; transform: translateY(-1px); box-shadow: 0 8px 20px rgba(232,197,71,0.3); }
   .btn-primary:active { transform: translateY(0); }
@@ -222,7 +222,7 @@
   /* ── ГЛАВНЫЙ ЭКРАН ПРИЛОЖЕНИЯ ── */
   #app-screen {
     flex-direction: column;
-    минимальная высота: 100vh;
+    минимальная height: 100vh;
   }
 
   .app-header {
@@ -232,9 +232,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    положение: липкое;
-    верх: 0;
-    z-индекс: 100;
+    position: липкое;
+    top: 0;
+    z-index: 100;
   }
 
   .header-left { display: flex; align-items: center; gap: 14px; }
@@ -242,17 +242,17 @@
     font-family: var(--font-head);
     font-size: 0.75rem;
     font-weight: 800;
-    цвет: var(--accent);
+    color: var(--accent);
     letter-spacing: 0.1em;
   }
   .header-divider { width: 1px; height: 24px; background: var(--border); }
   .header-store {
     font-size: 0.85rem;
     font-weight: 600;
-    цвет: var(--text);
+    color: var(--text);
     max-width: 300px;
-    пробел: nowrap;
-    переполнение: скрыто;
+    white-space: nowrap;
+    overflow: скрыто;
     text-overflow: ellipsis;
   }
 
@@ -263,27 +263,27 @@
     border-radius: 50px;
     padding: 5px 14px;
     font-size: 0.8rem;
-    цвет: var(--accent2);
+    color: var(--accent2);
   }
   .btn-logout {
-    фон: прозрачный;
-    граница: сплошная 1 пиксель var(--border);
-    цвет: var(--muted);
+    background: прозрачный;
+    border: сплошная 1 пиксель var(--border);
+    color: var(--muted);
     border-radius: 8px;
     padding: 6px 14px;
     font-size: 0.8rem;
-    курсор: указатель;
-    семейство шрифтов: var (--font-body);
-    переход: все 0,2 с;
+    cursor: указатель;
+    font-family: var(--font-body);
+    transition: все 0,2 с;
   }
-  .btn-logout:hover { border-color: var(--danger); цвет: вар (--опасность); }
+  .btn-logout:hover { border-color: var(--danger); color: вар (--опасность); }
 
   .app-main {
     flex: 1;
     padding: 2rem;
     max-width: 1100px;
     margin: 0 auto;
-    ширина: 100%;
+    width: 100%;
   }
 
   /* Тревога */
@@ -296,7 +296,7 @@
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
-    зазор: 14 пикселей;
+    gap: 14 пикселей;
     animation: slideDown 0.4s ease;
   }
   @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -314,7 +314,7 @@
 
   .stat-card {
     background: var(--card);
-    граница: сплошная 1 пиксель var(--border);
+    border: сплошная 1 пиксель var(--border);
     border-radius: 14px;
     padding: 1.2rem;
   }
@@ -322,7 +322,7 @@
   .stat-value { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; }
   .stat-value.yellow { color: var(--accent); }
   .stat-value.teal { color: var(--accent2); }
-  .stat-value.red { цвет: var(--danger); }
+  .stat-value.red { color: var(--danger); }
   .stat-value.green { color: var(--success); }
 
   /* Раздел таблицы */
@@ -336,24 +336,24 @@
     font-family: var(--font-head);
     font-size: 1rem;
     font-weight: 600;
-    цвет: var(--text);
+    color: var(--text);
   }
   .section-subtitle { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
 
   .btn-save-all {
     background: var(--accent);
-    цвет: #0e0f14;
-    граница: отсутствует;
+    color: #0e0f14;
+    border: отсутствует;
     border-radius: 10px;
     padding: 10px 22px;
     font-family: var(--font-head);
     font-size: 0.75rem;
     font-weight: 600;
-    курсор: указатель;
-    переход: все 0,2 с;
+    cursor: указатель;
+    transition: все 0,2 с;
     display: flex;
     align-items: center;
-    зазор: 8 пикселей;
+    gap: 8 пикселей;
   }
   .btn-save-all:hover { background: #f0d060; }
   .btn-save-all.saved { background: var(--success); color: white; }
@@ -361,23 +361,23 @@
   /* Таблица сотрудников */
   .emp-table-wrap {
     background: var(--card);
-    граница: сплошная 1 пиксель var(--border);
+    border: сплошная 1 пиксель var(--border);
     border-radius: 16px;
-    переполнение: скрыто;
+    overflow: скрыто;
   }
 
   .emp-table {
-    ширина: 100%;
+    width: 100%;
     border-collapse: collapse;
   }
 
   .emp-table th {
-    фон: var(--surface);
+    background: var(--surface);
     padding: 12px 16px;
     text-align: left;
     font-size: 0.75rem;
     font-weight: 600;
-    цвет: var(--muted);
+    color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     border-bottom: 1px Solid var(--border);
@@ -398,18 +398,18 @@
 
   .role-badge {
     display: inline-block;
-    фон: rgba(78,205,196,0.1);
+    background: rgba(78,205,196,0.1);
     border: 1px solid rgba(78,205,196,0.2);
     border-radius: 50px;
     padding: 2px 10px;
     font-size: 0.75rem;
-    цвет: var(--accent2);
+    color: var(--accent2);
   }
 
   .status-chip {
     display: inline-flex;
     align-items: center;
-    зазор: 5 пикселей;
+    gap: 5 пикселей;
     border-radius: 50px;
     padding: 3px 10px;
     font-size: 0.78rem;
@@ -420,16 +420,16 @@
   .status-chip.other { background: rgba(107,112,144,0.15); color: var(--muted); }
 
   .fired-input {
-    фон: var(--surface);
-    граница: сплошная 1 пиксель var(--border);
+    background: var(--surface);
+    border: сплошная 1 пиксель var(--border);
     border-radius: 8px;
-    цвет: var(--text);
+    color: var(--text);
     padding: 7px 12px;
     font-size: 0.85rem;
-    семейство шрифтов: var (--font-body);
-    ширина: 100%;
+    font-family: var(--font-body);
+    width: 100%;
     min-width: 160px;
-    план: отсутствует;
+    outline: отсутствует;
     transition: border-color 0.2s, background 0.2s;
   }
   .fired-input:not(:disabled) {
@@ -442,16 +442,16 @@
   .fired-input:disabled { opacity: 0.3; cursor: not-allowed; background: var(--bg); border: 1px solid var(--border); box-shadow: none; }
 
   .status-select {
-    фон: var(--surface);
-    граница: сплошная 1 пиксель var(--border);
+    background: var(--surface);
+    border: сплошная 1 пиксель var(--border);
     border-radius: 8px;
-    цвет: var(--text);
+    color: var(--text);
     padding: 6px 28px 6px 10px;
     font-size: 0.82rem;
-    семейство шрифтов: var (--font-body);
-    план: отсутствует;
-    курсор: указатель;
-    Внешний вид: отсутствует;
+    font-family: var(--font-body);
+    outline: отсутствует;
+    cursor: указатель;
+    appearance: отсутствует;
     -webkit-appearance: none;
     transition: border-color 0.2s, background 0.2s;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7090'/%3E%3C/svg%3E");
@@ -461,17 +461,17 @@
   .status-select.fired {
     border-color: var(--danger);
     background-color: rgba(255,107,107,0.08);
-    цвет: var(--danger);
+    color: var(--danger);
   }
   .status-select.working {
     border-color: rgba(107,203,119,0.4);
-    цвет: var(--success);
+    color: var(--success);
   }
 
   /* Панель экспорта */
   .export-panel {
     background: var(--card);
-    граница: сплошная 1 пиксель var(--border);
+    border: сплошная 1 пиксель var(--border);
     border-radius: 16px;
     padding: 1.5rem;
     margin-top: 1.5rem;
@@ -483,27 +483,27 @@
   .export-info strong { font-family: var(--font-head); font-size: 0.9rem; display: block; margin-bottom: 4px; }
   .export-info p { font-size: 0.82rem; color: var(--muted); }
   .btn-export {
-    фон: прозрачный;
-    граница: сплошная 1 пиксель var(--accent2);
-    цвет: var(--accent2);
+    background: прозрачный;
+    border: сплошная 1 пиксель var(--accent2);
+    color: var(--accent2);
     border-radius: 10px;
     padding: 10px 22px;
     font-family: var(--font-head);
     font-size: 0.75rem;
-    курсор: указатель;
-    переход: все 0,2 с;
-    пробел: nowrap;
+    cursor: указатель;
+    transition: все 0,2 с;
+    white-space: nowrap;
     flex-shrink: 0;
   }
   .btn-export:hover { background: rgba(78,205,196,0.1); }
 
   /* Тост */
   .toast {
-    положение: фиксированное;
+    position: фиксированное;
     bottom: 2rem;
-    справа: 2rem;
+    right: 2rem;
     background: var(--success);
-    цвет: белый;
+    color: белый;
     border-radius: 12px;
     padding: 12px 20px;
     font-size: 0.9rem;
@@ -511,16 +511,16 @@
     font-family: var(--font-head);
     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
     transform: translateY(100px);
-    непрозрачность: 0;
+    opacity: 0;
     transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-индекс: 999;
+    z-index: 999;
   }
   .toast.show { transform: translateY(0); opacity: 1; }
 
   /* Экран администратора */
   #admin-screen {
     flex-direction: column;
-    минимальная высота: 100vh;
+    минимальная height: 100vh;
   }
 
   .admin-grid {
@@ -541,7 +541,7 @@
     font-family: var(--font-head);
     font-size: 0.7rem;
     font-weight: 600;
-    цвет: var(--muted);
+    color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.12em;
     margin-bottom: 1rem;
@@ -550,15 +550,15 @@
   .store-list-item {
     padding: 10px 12px;
     border-radius: 10px;
-    курсор: указатель;
+    cursor: указатель;
     margin-bottom: 4px;
-    переход: фон 0,15 с;
+    transition: фон 0,15 с;
     border: 1px solid transparent;
   }
   .store-list-item:hover { background: rgba(255,255,255,0.04); }
   .store-list-item.active { background: rgba(232,197,71,0.1); border-color: rgba(232,197,71,0.2); }
   .store-list-item.status-done {
-    фон: rgba(34,197,94,0.08);
+    background: rgba(34,197,94,0.08);
     border-color: rgba(34,197,94,0.25);
   }
   .store-list-item.status-done:hover { background: rgba(34,197,94,0.13); }
@@ -572,7 +572,7 @@
   .store-list-item .fired-count {
     display: inline-block;
     background: rgba(255,107,107,0.2);
-    цвет: var(--danger);
+    color: var(--danger);
     border-radius: 50px;
     padding: 1px 8px;
     font-size: 0.7rem;
@@ -586,7 +586,7 @@
   }
 
   .search-box {
-    положение: относительное;
+    position: относительное;
     margin-bottom: 1rem;
   }
   .search-box input {
@@ -594,12 +594,12 @@
   }
   .search-box::before {
     контент: '🔍';
-    положение: абсолютное;
-    слева: 12 пикселей;
-    верхний предел: 50%;
+    position: абсолютное;
+    left: 12 пикселей;
+    top: 50%;
     transform: translateY(-50%);
     font-size: 0.9rem;
-    z-индекс: 1;
+    z-index: 1;
   }
 
   /* Кнопка гамбургер для мобильной админки */
@@ -674,7 +674,7 @@
   }
 </style>
 </head>
-<тело>
+<body>
 
 <!-- ЭКРАН ВХОДА -->
 <div id="login-screen" class="screen active">
@@ -900,7 +900,7 @@
       <div style="margin-bottom:1.5rem;padding:1rem;background:var(--surface);border-radius:12px;border:1px solid var(--border);">
         <div style="font-size:0.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Пароль Администратора</div>
         <div style="display:flex;gap:8px;">
-          <input type="password" id="admin-pw-input" Placeholder="Новый пароль администратора..." style="flex:1;">
+          <input type="password" id="admin-pw-input" placeholder="Новый пароль администратора..." style="flex:1;">
           <button onclick="saveAdminPassword()" style="background:var(--accent);color:#0e0f14;border:none;border-radius:8px;padding:8px 16px;font-family:var(--font-head);font-size:0.75rem;font-weight:600;cursor:pointer;white-space:nowrap;"> Сохранить</button>
         </div>
       </div>
@@ -932,7 +932,7 @@
         <div id="webhook-status" style="font-size:0.72rem;color:var(--muted);margin-top:4px;"></div>
       </div>
       <div class="search-box" style="margin-bottom:1rem">
-        <input type="text" Placeholder="Поиск магазина..." id="sidebar-search" oninput="filterSidebar()" style="font-size:0.85rem">
+        <input type="text" placeholder="Поиск магазина..." id="sidebar-search" oninput="filterSidebar()" style="font-size:0.85rem">
       </div>
       <div id="store-sidebar-list"></div>
     </aside>
@@ -980,7 +980,7 @@ function getStorePasswords() {
 
 function saveAdminPassword() {
   const val = document.getElementById('admin-pw-input').value.trim();
-  if (!val) { showToast('Введите пароль!', 'error'); возвращаться; }
+  if (!val) { showToast('Введите пароль!', 'error'); return; }
   localStorage.setItem(ADMIN_PW_KEY, val);
   document.getElementById('admin-pw-input').value = '';
   showToast('Пароль администратора сохранён!');
@@ -1027,7 +1027,7 @@ function filterPasswordList() {
 function saveStorePassword(storeKey, btn) {
   const input = btn.parentElement.querySelector('input[type="password"]');
   const val = input.value.trim();
-  if (!val) { showToast('Введите пароль!', 'error'); возвращаться; }
+  if (!val) { showToast('Введите пароль!', 'error'); return; }
   const pws = getStorePasswords();
   pws[storeKey] = val;
   localStorage.setItem(STORE_PW_KEY, JSON.stringify(pws));
@@ -1038,7 +1038,7 @@ function saveStorePassword(storeKey, btn) {
 
 function deleteStorePassword(storeKey, btn) {
   const pws = getStorePasswords();
-  удалить pws[storeKey];
+  delete pws[storeKey];
   localStorage.setItem(STORE_PW_KEY, JSON.stringify(pws));
   buildPasswordList(document.getElementById('pw-search').value);
   showToast('Пароль удалён');
@@ -1052,22 +1052,22 @@ let firedData = {};
 
 // Загружаем сохранённые данные из localStorage (сохраняются между сессиями)
 function loadSavedData() {
-  пытаться {
+  try {
     const saved = localStorage.getItem('firedData');
     if (saved) firedData = JSON.parse(saved);
   } catch(e) {}
 }
 
 function saveToPersistent() {
-  пытаться {
+  try {
     localStorage.setItem('firedData', JSON.stringify(firedData));
   } catch(e) {}
 }
 
 // Сохранение данных магазина в Firestore
-асинхронная функция saveStoreToFirestore(storeKey) {
+async function saveStoreToFirestore(storeKey) {
   if (!window._firebaseReady) return;
-  пытаться {
+  try {
     const storeData = firedData[storeKey] || {};
     const submitted = getSubmittedStores();
     const noChanges = JSON.parse(localStorage.getItem('noChangesStores') || '{}');
@@ -1080,20 +1080,20 @@ function saveToPersistent() {
     const safeId = storeKey.replace(/\//g, '_').replace(/\\/g, '_');
     await window._fsSetDoc(window._fsDoc(window._db, 'reports', safeId), {
       storeKey,
-      директор: магазин.директор,
+      director: store.director,
       email: EMAIL_MAP[storeKey] || '',
       firedData: storeData,
       firedCount: firedEmps.length,
       firedList: firedEmps.map(e => {
         const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
-        возвращаться {
-          имя: e.name,
-          роль: e.role,
-          дата: getFiredValueByKey(storeKey, empKey)
+        return {
+          name: e.name,
+          role: e.role,
+          date: getFiredValueByKey(storeKey, empKey)
         };
       }),
       submittedAt: submitted[storeKey] || null,
-      noChangesAt: noChanges[storeKey] || нулевой,
+      noChangesAt: noChanges[storeKey] || null,
       updatedAt: new Date().toISOString()
     });
     console.log(' ✅ Firestore: данные сохранены для', storeKey);
@@ -1103,13 +1103,13 @@ function saveToPersistent() {
 }
 
 // Загрузка статусов всех магазинов из Firestore (для админа)
-асинхронная функция loadAllFromFirestore() {
+async function loadAllFromFirestore() {
   if (!window._firebaseReady) return {};
-  пытаться {
+  try {
     const snapshot = await new Promise((resolve) => {
       const unsub = window._fsOnSnapshot(
         window._fsCollection(window._db, 'reports'),
-        (привязка) => { unsub(); решить (щелкнуть); }
+        (snap) => { unsub(); resolve (snap); }
       );
     });
     const result = {};
@@ -1120,13 +1120,13 @@ function saveToPersistent() {
       safeToReal[safeId] = k;
     });
     snapshot.forEach(d => {
-      const realKey = SafeToReal[d.id] || делал;
+      const realKey = safeToReal[d.id] || d.id;
       result[realKey] = d.data();
     });
-    вернуть результат;
+    return result;
   } catch(e) {
     console.warn('⚠️ Ошибка загрузки Firestore:', e);
-    возвращаться {};
+    return {};
   }
 }
 
@@ -1150,7 +1150,7 @@ function toggleLoginType() {
   wrap.style.display = isAdmin ? 'none' : 'block';
 }
 
-функция login() {
+function login() {
   const sel = document.getElementById('login-type');
   const isAdmin = sel.selectedIndex === 1;
   const type = isAdmin ? 'admin' : 'director';
@@ -1158,31 +1158,31 @@ function toggleLoginType() {
 
   if (type === 'admin') {
     const adminPw = getAdminPassword();
-    if (adminPw && пароль !== adminPw) {
-      showToast('Неверный пароль администратора!', 'ошибка');
-      возвращаться;
+    if (adminPw && password !== adminPw) {
+      showToast('Неверный пароль администратора!', 'error');
+      return;
     }
     if (!adminPw) {
-      showToast('Пароль не установлен — первый вход разрешен', 'ошибка');
+      showToast('Пароль не установлен — первый вход разрешен', 'error');
       // Разрешаем вход без пароля, если он ещё не выбран
     }
     document.getElementById('login-password').value = '';
     showScreen('admin-screen');
     buildAdminSidebar();
-    возвращаться;
+    return;
   }
 
   const storeKey = document.getElementById('store-select').value;
-  if (!storeKey) { showToast('Выберите магазин!', 'ошибка'); возвращаться; }
+  if (!storeKey) { showToast('Выберите магазин!', 'error'); return; }
 
   const pws = getStorePasswords();
   const storePw = pws[storeKey];
   if (storePw && password !== storePw) {
-    showToast('Неверный пароль!', 'ошибка');
-    возвращаться;
+    showToast('Неверный пароль!', 'error');
+    return;
   }
   if (!storePw) {
-    showToast('Пароль не установлен — обратиться к администратору', 'ошибка');
+    showToast('Пароль не установлен — обратиться к администратору', 'error');
     // Разрешаем вход без пароля, если он ещё не выбран
   }
 
@@ -1192,7 +1192,7 @@ function toggleLoginType() {
   buildDirectorView(storeKey);
 }
 
-функция logout() {
+function logout() {
   currentStore = null;
   showScreen('login-screen');
 }
@@ -1213,9 +1213,9 @@ function buildDirectorView(storeKey) {
   });
 }
 
-асинхронная функция loadStoreFromFirestore(storeKey) {
+async function loadStoreFromFirestore(storeKey) {
   if (!window._firebaseReady) return;
-  пытаться {
+  try {
     const safeId = storeKey.replace(/\//g, '_').replace(/\\/g, '_');
     const docRef = window._fsDoc(window._db, 'reports', safeId);
     const snap = await window._fsGetDoc(docRef);
@@ -1239,7 +1239,7 @@ function _renderDirectorView(storeKey) {
   const firedCount = store.employees.filter(e => {
     const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
     return getStatusOverrideByKey(storeKey, empKey) === 'Уволен';
-  }).длина;
+  }).length;
   constworking = store.employees.filter(e => e.status === 'Работает').length;
   const other = total - working;
 
@@ -1266,7 +1266,7 @@ function getStatusOverrideByKey(storeKey, empKey) {
   if (!firedData[storeKey]) return null;
   // Проверяем оба соединения ключа: строковую и числовую
   // Игнорируемые ключи, которые могли появиться из-за перевода браузера
-  const INVALID_KEYS = ['null', 'undefined', 'нулевой', 'ноль', 'нет'];
+  const INVALID_KEYS = ['null', 'undefined', 'null', 'ноль', 'нет'];
   if (INVALID_KEYS.includes(String(empKey).toLowerCase())) return null;
   const d = firedData[storeKey][empKey] || firedData[storeKey][Number(empKey)] || null;
   return (d && d.status) || null;
@@ -1274,7 +1274,7 @@ function getStatusOverrideByKey(storeKey, empKey) {
 
 function getFiredValueByKey(storeKey, empKey) {
   if (!firedData[storeKey]) return '';
-  const INVALID_KEYS = ['null', 'undefined', 'нулевой', 'ноль', 'нет'];
+  const INVALID_KEYS = ['null', 'undefined', 'null', 'ноль', 'нет'];
   if (INVALID_KEYS.includes(String(empKey).toLowerCase())) return '';
   const d = firedData[storeKey][empKey] || firedData[storeKey][Number(empKey)] || null;
   return (d && d.date) || '';
@@ -1288,7 +1288,7 @@ function normalizeStatus(status) {
   if (s === 'Работает') return 'Работает';
   // Нормализуем все варианты "уволен" к единому мнению
   if (s.toLowerCase().startsWith('уволен') || s.toLowerCase() === 'уволена') return 'Уволен';
-  вернуть s;
+  return s;
 }
 
 function buildTable(storeKey) {
@@ -1304,7 +1304,7 @@ function buildTable(storeKey) {
     const statusOverride = getStatusOverrideByKey(storeKey, empKey);
     const baseStatus =normalizeStatus(emp.status);
     const isFired = statusOverride === 'Уволен' || (!statusOverride && baseStatus === 'Уволен');
-    const currentStatus = statusOverride || базовый статус;
+    const currentStatus = statusOverride || baseStatus;
 
     const safeKey = storeKey.replace(/&/g, '&').replace(/"/g, '"');
     const tr = document.createElement('tr');
@@ -1327,7 +1327,7 @@ function buildTable(storeKey) {
         <ввод
           class="fired-input ${dateVal ? 'has-value' : ''}"
           type="text"
-          Placeholder="ДД.ММ.ГГГГ"
+          placeholder="ДД.ММ.ГГГГ"
           value="${dateVal}"
           data-emp="${empKey}"
           data-store="${safeKey}"
@@ -1345,7 +1345,7 @@ function onStatusChange(el) {
   const storeKey = el.dataset.store;
   if (!firedData[storeKey]) firedData[storeKey] = {};
   const empNum = el.dataset.emp;
-  if (!empNum || empNum === 'null' || empNum === 'undefined' || empNum === 'нулевой') return;
+  if (!empNum || empNum === 'null' || empNum === 'undefined' || empNum === 'null') return;
   if (!firedData[storeKey][empNum]) firedData[storeKey][empNum] = { status: '', date: '' };
   firedData[storeKey][empNum].status = el.value;
   const isFired = el.value === 'Уволен';
@@ -1369,10 +1369,10 @@ function onStatusChange(el) {
 function onFiredInput(el) {
   const storeKey = el.dataset.store;
   const empNum = el.dataset.emp;
-  if (!empNum || empNum === 'null' || empNum === 'undefined' || empNum === 'нулевой') return;
+  if (!empNum || empNum === 'null' || empNum === 'undefined' || empNum === 'null') return;
   let v = el.value.replace(/\D/g, '');
   if (v.length >= 3 && v.length <= 4) v = v.slice(0,2) + '.' + v.slice(2);
-  иначе, если (v.length >= 5) v = v.slice(0,2) + '.' + v.slice(2,4) + '.' + v.slice(4,8);
+  else if (v.length >= 5) v = v.slice(0,2) + '.' + v.slice(2,4) + '.' + v.slice(4,8);
   el.value = v;
 
   if (!firedData[storeKey]) firedData[storeKey] = {};
@@ -1389,7 +1389,7 @@ function updateFiredStat(storeKey) {
   const firedCount = store.employees.filter(e => {
     const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
     return getStatusOverrideByKey(storeKey, empKey) === 'Уволен';
-  }).длина;
+  }).length;
   const statEl = document.getElementById('stat-fired');
   if (statEl) statEl.textContent = firedCount;
 }
@@ -1446,16 +1446,16 @@ function submitReport() {
     return getStatusOverrideByKey(currentStore, empKey) === 'Уволен';
   });
   const payload = {
-    магазин: currentStore,
-    директор: магазин.директор,
+    store: currentStore,
+    director: store.director,
     email: EMAIL_MAP[currentStore] || '',
     firedCount: firedEmps.length,
     firedList: firedEmps.map(e => {
       const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
-      возвращаться {
-        имя: e.name,
-        роль: e.role,
-        дата: getFiredValueByKey(currentStore, empKey)
+      return {
+        name: e.name,
+        role: e.role,
+        date: getFiredValueByKey(currentStore, empKey)
       };
     }),
     submittedAt: new Date().toLocaleString('ru-RU')
@@ -1474,11 +1474,11 @@ function submitReport() {
       btn.style.background = 'var(--success)';
       btn.innerHTML = '<span> ✅</span> Отчёт отправки';
       showToast('Отчёт отмечен как отправленный!');
-      возвращаться;
+      return;
     }
     fetch(url, {
-      метод: 'POST',
-      заголовки: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
     .then(() => {
@@ -1522,8 +1522,8 @@ function submitNoChanges() {
   const WEBHOOK_URL = localStorage.getItem('webhookUrl') || '';
   const store = STORES[currentStore];
   const payload = {
-    магазин: currentStore,
-    директор: магазин.директор,
+    store: currentStore,
+    director: store.director,
     email: EMAIL_MAP[currentStore] || '',
     noChanges: true,
     firedCount: 0,
@@ -1532,8 +1532,8 @@ function submitNoChanges() {
   };
   if (WEBHOOK_URL) {
     fetch(WEBHOOK_URL, {
-      метод: 'POST',
-      заголовки: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     }).catch(() => {});
   }
@@ -1579,7 +1579,7 @@ function updateSubmitBtn(storeKey) {
     btnNC.innerHTML = '<span> ✅</span> Без изменений';
     btnNC.disabled = false;
     btnNC.onclick = submitNoChanges;
-  } еще {
+  } else {
     btn.style.background = 'var(--accent2)';
     btn.innerHTML = '<span>📤</span> Отправить отчёт';
     btn.disabled = false;
@@ -1593,7 +1593,7 @@ function updateSubmitBtn(storeKey) {
 
 const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий месяц","3":"Работало всего за текущий месяц","4":"Текущее состояние","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":2,"c":{"1":"РИКА КЗ","2":null,"3":null,"4":null}},{"r":3,"c":{"1":"DC001 Центр","2":73,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":4,"c":{"1":"40001 г. Караганда Таир","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":5,"c":{"1":2,"2":"Зарлықова Дильназ Қуандыққызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8" :null,"9":null,"10":null,"11":null,"12":null}},{"r":6,"c":{"1":3,"2":"Кошанова Томирис Талғатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":7,"c":{"1":4,"2":"Лагзин Виталий Александрович","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":8,"c":{"1":5,"2":"Фатхлисламова Динара Даниловна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":9,"c":{"1":6,"2":"Чибизова Вера Андреевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":10,"c":{"1":7,"2":"Шлей Алёна Сергеевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":11,"c":{"1":"40004 г. Темиртау Элем","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":12,"c":{"1":8,"2":"Арапбаева Гульназ Еркебаевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":13,"c":{"1":9,"2":"Дивнич Елизавета Поликарповна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":14,"c":{"1":10,"2":"Зубарева Елена Владимировна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":15,"c":{"1":11,"2":"Кудряшова Наталья Андреевна","3":"Продавец-консультант ювелирные изделия","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":16,"c":{"1":12,"2":"Рахиманбердиева Балнұр Шахмарданқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":nul l,"9":null,"10":null,"11":null,"12":null}},{"r":17,"c":{"1":13,"2":"Төлегенова Жібек Базарбайқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":18,"c":{"1":"40047 г. Кокшетау","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":19,"c":{"1":14,"2":"Абдеева Зауреш Кайраткызы","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":20,"c":{"1":15,"2":"Клепец Лидия Павловна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":21,"c":{"1":16,"2":"Нуртазова Адема Ауэзхановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":22,"c":{"1":17,"2":"Тулегенов Руслан Алтынбекович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":23,"c":{"1":"40049 г. Караганда","2":3,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":24,"c":{"1":18,"2":"Лёвин Валентин Викторович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":25,"c":{"1":19,"2":"Пономарева Анна Ивановна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":26,"c":{"1":20,"2":"Такеев Арман Саятович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":27,"c":{"1":null,"2":"Нұрдилла Айзат Қасымханқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":28,"c":{"1":"40082 г.Петропавловск ТЦ Рахмет","2":3,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":29,"c":{"1":21,"2":"Агисов Нуржан Бауыржанович», «3»:"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":30,"c":{"1":22,"2":"Корикова Анжелика Алексеевна","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":31,"c":{"1":23,"2":"Поспелова Светлана Викторовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":32,"c":{"1":24,"2":"Серикбаев Алмас Жасланович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":33,"c":{"1":"40098 г.Петропавловск ТЦ Сити Молл","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":34,"c":{"1":26,"2":"Боканов Темирлан Бауржанович","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":35,"c":{"1":27,"2":"Галицкая Елена Александровна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":36,"c":{"1":28,"2":"Есілбай Айгерім Адайқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":37,"c":{"1":30,"2":"Каирбаева Айдана Сериковна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":38,"c":{"1":31,"2":"Мурзахмет Айжан Айдарбекқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":39,"c":{"1":32,"2":"Нурова Анжелика Сериковна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":40,"c":{"1":33,"2":"Селев Валерий Александрович","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":41,"c":{"1":34,"2":"Серік Тайырхан Талғатұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":42,"c":{"1":35,"2":"Туйбаев Даниял Садырбекович","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":43,"c":{"1":null,"2":"Қажен Қуанар Русланұлы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":44,"c":{"1":"40106 г. Петропавловск ТРЦ Достык Молл","2":8,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":45,"c":{"1":36,"2":"Бейсеке Уева Нурмашевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":46,"c":{"1":37,"2":"Вегель Оксана Викторовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":47,"c":{"1":38,"2":"Капарова Анара Галымжанкызы","3":"Продавец-кассир 0,5 ставки","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":48,"c":{"1":39,"2":"Копеева Айым Самаркановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":49,"c":{"1":40,"2":"Майдан Оразбай Қанатұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":50,"c":{"1":41,"2":"Оразбай Елдос Толобайұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":51,"c":{"1":42,"2":"Оркешева Раушан Муратовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":52,"c":{"1":43,"2":"Федина Оксана Дмитриевна","3":"Продавец-консультант ювелирные изделия","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":53,"c":{"1":"40115 г. Караганда ТРЦ Грандстор","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":54,"c":{"1":44,"2":"Абдреуикова Аида Сериккызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":55,"c":{"1":45,"2":"Альжанова Шолпан Замирқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":56,"c":{"1":46,"2":"Достанова Дильназ Болатовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":57,"c":{"1":47,"2":"Женисова Назым Нуркеновна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":58,"c":{"1":48,"2":"Камзабекова Аңсаған Сарсенғалиқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":59,"c":{"1":49,"2":"Серік Аида","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":60,"c":{"1":50,"2":"Шахтай Аружан Ғабитқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":61,"c":{"1":"40118 г. Караганда ТД Ануар","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":62,"c":{"1":52,"2":"Волкова Жанна Дарменовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":63,"c":{"1":53,"2":"Маркус Валерия Сергеевна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":64,"c":{"1":54,"2":"Махади Медина Ыбырайқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":65,"c":{"1":55,"2":"Титова Елизавета Павловна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":66,"c":{"1":"40122 г. Караганда ТРК Global Город","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":67,"c":{"1":56,"2":"Айтпакаева Айдана Сакенқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":68,"c":{"1":57,"2":"Алдабергенова Гозал Сулхадиновна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":69,"c":{"1":58,"2":"Коровяковская Людмила Александровна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":70,"c":{"1":59,"2":"Сакипов Алдияр Жанатович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":71,"c":{"1":60,"2":"Сушкова Оксана Денисовна","3":"Продавец-консультант ювелирные изделия","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":72,"c":{"1":61,"2":"Туравинина Татьяна Владимировна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":73,"c":{"1":"40145 г.Темиртау ТЦ Аян-Пассаж","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":74,"c":{"1":63,"2":"Аяан Айсулу","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":75,"c":{"1":64,"2":«Бауыржанова Аружан Есканатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":76,"c":{"1":65,"2":"Хабылбек Айсауле","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":77,"c":{"1":66,"2":"Хабылбек Айтолхын","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":78,"c":{"1":"40151 г.Щучинск ТД Архей","2":3,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":79,"c":{"1":67,"2":"Гросс Юлия Дмитриевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":80,"c":{"1":68,"2":"Ковачева Анастасия Борисовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":81,"c":{"1":69,"2":"Рюмина Ольга Денисовна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":82,"c":{"1":null,"2":"Мельникова Лариса Анатольевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":83,"c":{"1":"40165 г.Караганда ТРЦ Каскад","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":84,"c":{"1":71,"2":"Мазуркевич Илона Викторовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":85,"c":{"1":72,"2":"Сайдалиева Диляра Нұрланқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8": null,"9":null,"10":null,"11":null,"12":null}},{"r":86,"c":{"1":73,"2":"Сапиева Дильназ Ешмуханбетовна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":87,"c":{"1":74,"2":"Яшутина Ольга Сергеевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":88,"c":{"1":"40168 г.Караганда ТД Абсолют","2":4,"3":ноль,"4":ноль,"5":ноль,"6":ноль,"7":ноль,"8":ноль,"9": null,"10":null,"11":null,"12":null}},{"r":89,"c":{"1":75,"2":"Бақытжанқызы Меруерт","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":90,"c":{"1":76,"2":"Берикболат Айсулу","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":91,"c":{"1":77,"2":"Каппасова Айгерим Кайржановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":92,"c":{"1":78,"2":"Менченко Алёна Сергеевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":93,"c":{"1":79,"2":"Халилова Марина Нурадиновна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":94,"c":{"1":80,"2":"Халилова Чичаг Нурадиновна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":95,"c":{"1":"40173 г.Кокшетау ТРЦ Кокшетау Торговый центр","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":96,"c":{"1":81,"2":"Егоров Владислав Игоревич","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":97,"c":{"1":82,"2":"Иванова Римма Васильевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":98,"c":{"1":83,"2":"Нуржанова Айгерим Батыржановна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":99,"c":{"1":84,"2":"Тулеуова Зухра Алпысбаевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":100,"c":{"1":null,"2":"Пасько Валентина Владимировна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":101,"c":{"1":"DC002 Юг","2":79,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":102,"c":{"1":"40006 г. Кызыл-Орда Час","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":103,"c":{"1":86,"2":"Ақмағамбетов Азамат Талғатұлы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":104,"c":{"1":87,"2":"Базарбай Ақмаржан Бақытжанқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":nul l,"9":null,"10":null,"11":null,"12":null}},{"r":105,"c":{"1":88,"2":"Кувалдин Сергей Валерьевич","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":106,"c":{"1":89,"2":"Өміртай Айзада Қаныбекқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":107,"c":{"1":91,"2":"Фабиев Сабит Фабиевич","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":108,"c":{"1":null,"2":"Шахмарал Шахсұлтан Омарұлы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":109,"c":{"1":null,"2":"Насрадинова Жансая Насрадинқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":110,"c":{"1":"40009 г. Шымкент Hyper House","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":111,"c":{"1":92,"2":"Алиева Дильноза Улугбековна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":112,"c":{"1":93,"2":"В Сергей Сергеевич","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":113,"c":{"1":94,"2":"Исаков Виктор Андреевич","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":114,"c":{"1":95,"2":"Кононенко Ирина Григорьевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":115,"c":{"1":96,"2":"Қожақымет Перизат Асылханқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":nu ll,"9":null,"10":null,"11":null,"12":null}},{"r":116,"c":{"1":97,"2":"Сидиропуло Ольга Николаевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":117,"c":{"1":"40014 г. Шымкент Баян сулу","2":11,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":118,"c":{"1":98,"2":"Абдиева Дилшода Алмурзаевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":119,"c":{"1":99,"2":"Амирхан Аяжан Ерболқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":n ull,"9":null,"10":null,"11":null,"12":null}},{"r":120,"c":{"1":100,"2":"Жұман Назым Дәуренбекқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":121,"c":{"1":101,"2":"Зиятдинова Умида Мухиддиновна","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":122,"c":{"1":102,"2":"Мадиева Сабрина Улугбековна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":123,"c":{"1":103,"2":"Мирзахамдамов Хусан Хилалидинович","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":124,"c":{"1":104,"2":"Орынбаева Ақжібек Серікбайқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":125,"c":{"1":105,"2":"Сәрсен Назерке Сұлтанқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":126,"c":{"1":106,"2":"Тажиметова Надира Султанбековна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":127,"c":{"1":107,"2":"Франджи Евгения Николаевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":128,"c":{"1":108,"2":"Хайруллаева Диана Гайратовна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":129,"c":{"1":null,"2":"Амрулла Фарида Рамадинқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":130,"c":{"1":"40068 г.Тараз ТД Баян Сулу","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":131,"c":{"1":109,"2":"Кошкар Айбек Әбдірәсілұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":132,"c":{"1":110,"2":"Қайып Әсемкүл Ырзағалиқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":133,"c":{"1":111,"2":"Сабыр Жансая Есболқызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":134,"c":{"1":112,"2":"Үйкекбай Балнұр Әбілекқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":135,"c":{"1":"40096 г Тараз ТЦ МАРТ","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":136,"c":{"1":113,"2":"Избасар Рамазан Болатұлы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":137,"c":{"1":114,"2":"Кемелова Жулдыз Алтынканатовна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":138,"c":{"1":115,"2":"Мадимар Нұрсұлтан Сұрапбергенұлы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":139,"c":{"1":116,"2":"Мотасова Екатерина Владимировна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":140,"c":{"1":117,"2":"Тобыш Аружан Ахметқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":141,"c":{"1":"40099 г. Кызылорда. ТРЦ Арай Сити Mall","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":142,"c":{"1":118,"2":"Жасталап Дильназ Маратқызы","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":143,"c":{"1":119,"2":"Қошмағанбет Батырхан Әділжанұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":144,"c":{"1":120,"2":"Құлмырзаева Айдана Айтуғанқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":nu ll,"9":null,"10":null,"11":null,"12":null}},{"r":145,"c":{"1":121,"2":"Құрманбек Нұржан Маратұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":146,"c":{"1":123,"2":"Тлеугабылов Амир","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":147,"c":{"1":"40100 г. Шымкент Колос","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":148,"c":{"1":124,"2":"Вагапова Маргарита Сергеевна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":149,"c":{"1":125,"2":"Дусенбаева София Тимуровна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":150,"c":{"1":127,"2":"Нұртас Нұрсұлтан Ғалымжанұлы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":n ull,"9":null,"10":null,"11":null,"12":null}},{"r":151,"c":{"1":128,"2":"Семёнова Вита Викторовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":152,"c":{"1":"40113 г. Шымкент ТРК Бекжан","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":153,"c":{"1":129,"2":"Амантаева Рима Набиевна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":154,"c":{"1":130,"2":"Аширбекова Маржан Рустамовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":155,"c":{"1":131,"2":"Жаксиликова Динара Ербол Кизи","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":156,"c":{"1":132,"2":"Жумақулова Лаззат Есенғалиқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":157,"c":{"1":133,"2":"Ислам Ажар Әсебекқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":158,"c":{"1":134,"2":"Кенжебаева Әсел Багланқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":159,"c":{"1":null,"2":"Асан Аружан Нурланқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":160,"c":{"1":"40114 г. Шымкент ТЦ Северный","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":161,"c":{"1":135,"2":"Ерланқызы Назерке","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":162,"c":{"1":136,"2":"Мейрамбекқызы Нұрдана","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":163,"c":{"1":137,"2":"Рахим Шолпан Ержанқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":164,"c":{"1":138,"2":"Сейтмахан Гүлфайруз Мүслімқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":165,"c":{"1":139,"2":"Хайруллаев Фарух Нуруллаевич","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":166,"c":{"1":null,"2":"Махсутова Айсанам Ильхамиддиновна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":167,"c":{"1":"40128 г. Туркестан ТРЦ Ханшаим Plaza","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":168,"c":{"1":140,"2":"Ильясқызы Нұргүл","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":169,"c":{"1":141,"2":"Қамбарбек Ұлжалғас Қошанқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":170,"c":{"1":142,"2":"Полеева Кристина Владимировна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":171,"c":{"1":143,"2":"Полеева Людмила Владимировна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":172,"c":{"1":144,"2":"Сайфулла Нурсауле Ильясқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":173,"c":{"1":"40131 г. Шымкент ТЦ Фиркан Город","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":174,"c":{"1":145,"2":"Иноятова Асия Сеитхасим Кизи","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":175,"c":{"1":146,"2":"Кужелева Алёна Дмитриевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":176,"c":{"1":147,"2":"Кушалиев Руслан Александрович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":177,"c":{"1":148,"2":"Листопадова Евгения Вячеславовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9" :null,"10":null,"11":null,"12":null}},{"r":178,"c":{"1":149,"2":"Хабибуллақызы Омина","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":179,"c":{"1":null,"2":"Хабибуллақызы Муслима","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":180,"c":{"1":"40155 г.Шымкент ТД Лакомка","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":181,"c":{"1":150,"2":"Бегленбет Азамат Еркебуланұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":182,"c":{"1":151,"2":"Ваевасиль Ирина Игоревна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":183,"c":{"1":152,"2":"Камша Виктория","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":184,"c":{"1":153,"2":"Кыдырмат Мансурбек Алишерович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":185,"c":{"1":"40158 г.Шымкент ТРК Даймонд Плаза","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":186,"c":{"1":154,"2":"Абдурахмонова Зарина Орынбекқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":187,"c":{"1":155,"2":"Біләл Мавлюда Тұрсынқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null, "9":null,"10":null,"11":null,"12":null}},{"r":188,"c":{"1":156,"2":"Жеңіс Айым Сайдығапарқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":189,"c":{"1":157,"2":"Қайролла Нұрдаулет Бекжанұлы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":190,"c":{"1":158,"2":"Сабирова Лаура Абдумуханқизи","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":191,"c":{"1":"40162 г.Шымкент ТРЦ Шымкент Сити Mall","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":192,"c":{"1":159,"2":"Араппаева Аселя Гуломханқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":193,"c":{"1":160,"2":"Балтабаева Жанар Батырбекқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":194,"c":{"1":161,"2":"Ергенбай Мерей Ерболатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":195,"c":{"1":162,"2":"Мақсут Іңқәрі Қайратқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9" :null,"10":null,"11":null,"12":null}},{"r":196,"c":{"1":163,"2":"Мамашарипова Айдана Сагит кизи","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":197,"c":{"1":164,"2":"Филатова Ксения Сергеевна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":198,"c":{"1":"DC003 Запад","2":75,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":199,"c":{"1":"40019 г. Уральск Универмаг","2":8,"3":ноль,"4":ноль,"5":ноль,"6":ноль,"7":ноль,"8":ноль,"9" :null,"10":null,"11":null,"12":null}},{"r":200,"c":{"1":169,"2":"Айдабулова Лунара Ахметовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":201,"c":{"1":170,"2":"Айткаирова Лиза Орынгалиевна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":202,"c":{"1":171,"2":"Балмулдина Радмила Жасланқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":203,"c":{"1":172,"2":"Газизова Әсем Рахметқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":204,"c":{"1":173,"2":"Гапарова Салтанат Лукпановна (осн.)","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":205,"c":{"1":175,"2":"Жолдығалиева Айымгүл Беренқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":206,"c":{"1":176,"2":"Максутов Бекзат Тимурұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":207,"c":{"1":177,"2":"Мамаева Жанна Жумагалиевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":208,"c":{"1":179,"2":"Тұрар Нұржан Нұрланұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":209,"c":{"1":"40021 г. Аксай Жарсуат","2":3,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":210,"c":{"1":180,"2":"Баженова Валентина Петровна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":211,"c":{"1":182,"2":"Уралова Зарина Сериковна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":212,"c":{"1":183,"2":"Шингалиева Маржан Демешевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":213,"c":{"1":null,"2":"Тухватуллина Лиана Руслановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":214,"c":{"1":null,"2":"Халанская Надежда Александровна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":215,"c":{"1":"40035 г. Вернисаж","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":216,"c":{"1":185,"2":"Королёва Анна Андреевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":217,"c":{"1":186,"2":"Космухамбетова Елена Сергеевна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":218,"c":{"1":187,"2":"Қамидолла Ольга Вячеславовна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":219,"c":{"1":188,"2":"Мокроусова Ольга Викторовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":220,"c":{"1":189,"2":"Поротикова Елена Владимировна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":221,"c":{"1":190,"2":"Сабирова Римма Римовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":222,"c":{"1":"40037 г. Костанай БУМ","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":223,"c":{"1":193,"2":"Жумабаева Адия Сакеновна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":224,"c":{"1":194,"2":"Кабиева Руфина Салауатовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":225,"c":{"1":195,"2":"Килибаев Берик Саматович","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":226,"c":{"1":196,"2":"Лапшакова Стелла Андреевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":227,"c":{"1":null,"2":"Утегенова Анель Даутовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":228,"c":{"1":"40069 г.Уральск Спорттовары","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":229,"c":{"1":197,"2":"Басенова Тамара Викторовна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":230,"c":{"1":198,"2":"Бисембаева Гульназ Бериковна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":231,"c":{"1":199,"2":"Гмыря Элеонора Александровна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":232,"c":{"1":200,"2":"Жубаева Слуганым Айпкалиевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":233,"c":{"1":201,"2":"Махсутова Анаргул Ситкереевна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":234,"c":{"1":202,"2":"Умурбекова Наталья Бахадировна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":235,"c":{"1":null,"2":"Бекбау Асель Ергенқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":236,"c":{"1":"40074 г. Актобе Мега","2":9,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":237,"c":{"1":203,"2":"Бисенали Актоты Пангерейкызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":238,"c":{"1":204,"2":"Владимирова Румия Зуфаровна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":239,"c":{"1":205,"2":"Грбенникова Александра Андреевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":240,"c":{"1":206,"2":"Ғалымжанова Жансая Қайратқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":241,"c":{"1":207,"2":"Живкина Юлия Александровна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":242,"c":{"1":208,"2":"Каспирова Олеся Станиславна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":243,"c":{"1":209,"2":"Сәрсенғали Сандуғаш Рүстемқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":244,"c":{"1":210,"2":"Сериков Диас Серікұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":245,"c":{"1":211,"2":"Туралиева Нургуль Алтынбековна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":246,"c":{"1":212,"2":"Уразбаева Гульмира Бериккызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":247,"c":{"1":213,"2":"Шарафутдинова Анна Вадимовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":248,"c":{"1":"40092 г.Кустанай Кустанай Плаза","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":249,"c":{"1":214,"2":"Аманжол Ботагөз","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":250,"c":{"1":215,"2":"Зиядинова Аружан Муратовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":251,"c":{"1":217,"2":"Молдабекова Диана Серикбаевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":252,"c":{"1":218,"2":"Мусырханова Әмина Кайратқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":253,"c":{"1":219,"2":"Нурмуханова Аяжан Ерболатовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":254,"c":{"1":220,"2":"Серікбаева Гүлнат Бөгетбайқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":n ull,"9":null,"10":null,"11":null,"12":null}},{"r":255,"c":{"1":221,"2":"Шайхислам Ботагоз Спартаккызы (осн.)","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":256,"c":{"1":"40094 г.Актобе ТЦ Океан","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":257,"c":{"1":222,"2":"Безуглова Наталья Николаевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":258,"c":{"1":223,"2":"Бексебаева Кундыз Айдарбековна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":259,"c":{"1":226,"2":"Казберук Евгения Алексеевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":260,"c":{"1":227,"2":"Мадиярова Дана Бактыгалиевна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":261,"c":{"1":228,"2":"Мукатаев Бауыржан Канатович","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":262,"c":{"1":229,"2":"Умарова Диана Азаматқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":263,"c":{"1":"40120 г. Уральск ТЦ Атриум","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":264,"c":{"1":231,"2":"Васюков Никита Витальевич","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":265,"c":{"1":232,"2":"Гиниятов Абылай Кумарович","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":266,"c":{"1":233,"2":"Масутов Максат Магауияевич (осн.)","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":267,"c":{"1":234,"2":"Шахова София Денисовна (осн.)","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":268,"c":{"1":"40126 г. Актобе ТРЦ Актобе Молл","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":269,"c":{"1":235,"2":"Атки Миеврас Тимурович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":270,"c":{"1":236,"2":"Жолдасбай Дарина Максатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":271,"c":{"1":237,"2":"Игнатова Диана Владимировна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":272,"c":{"1":238,"2":"Калдина Ажар Нурмухаметовна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":273,"c":{"1":239,"2":"Сарсенбаева Алина Жангировна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":274,"c":{"1":240,"2":"Сутова Динара Базарбаевна (осн.)","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":275,"c":{"1":null,"2":"Төремырза Жаннұр Айтөреқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":276,"c":{"1":"40144 г.Зачаганск ТЦ Жангирхан","2":4,"3":null, "4":null, "5":null, "6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":277,"c":{"1":241,"2":"Амангелдин Актилек Болатович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":278,"c":{"1":242,"2":"Жуманьязов Бахтияр Батыржанулы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":279,"c":{"1":243,"2":"Монахов Владислав Виталиевич","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":280,"c":{"1":244,"2":"Рамазанова Лунара Жасталаповна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":281,"c":{"1":"40160 г.Актобе ТЦ Центр Далиды","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":282,"c":{"1":245,"2":"Ахметалиев Салим Куаниш Ули","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":283,"c":{"1":247,"2":"Грбенников Михаил Викторович","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":284,"c":{"1":249,"2":"Мулач Анна Викторовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":285,"c":{"1":250,"2":"Оразғұлов Арыслан Нұрланұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":286,"c":{"1":251,"2":"Серікбай Ернұр Нұрланұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":287,"c":{"1":252,"2":"Төреханов Арсен Серікұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":288,"c":{"1":null,"2":"Хайроллаева Анель Умиралиевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":289,"c":{"1":"40169 г.Актобе ТД Дина","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":290,"c":{"1":254,"2":"Ахмедиярова Жанар Биржановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":291,"c":{"1":255,"2":"Данилова Зибагуль Аманжоловна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":292,"c":{"1":256,"2":"Загретдинова Гулзия Рафисовна","3":"Продавец-консультант ювелирных изделий изделия","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":293,"c":{"1":257,"2":"Қартбай Ернар Қартбайұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":294,"c":{"1":259,"2":"Тынабаев Әділбек Райбекұлы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":295,"c":{"1":"DC004 Алматы 1","2":86,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":296,"c":{"1":"40003 г. Алматы Молла Апорт","2":12,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":297,"c":{"1":265,"2":"Абдрахманова Арайлым Омаровна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":298,"c":{"1":266,"2":"Абдукасымова Назерке Бакытбековна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":n ull,"9":null,"10":null,"11":null,"12":null}},{"r":299,"c":{"1":267,"2":"Бұхтарбай Бахытбек Арғынбайұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":300,"c":{"1":268,"2":"Жаныбек Маржан Жаныбеқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":301,"c":{"1":269,"2":"Комекбаева Айгерим Байбосынқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":302,"c":{"1":270,"2":"Консбаева Лаура Ерболқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":303,"c":{"1":271,"2":"Құрақбай Айнұр Серікқызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":304,"c":{"1":272,"2":"Наурызбай Диас Мұратұлы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":305,"c":{"1":273,"2":"Нургельдина Махпал Нургельдыкызы","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":306,"c":{"1":274,"2":"Орынбасарова Қапия Жанатқызы","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":307,"c":{"1":276,"2":"Ташметова Альбина Рустембайқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":308,"c":{"1":278,"2":"Умек Гүлім Бекзатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":309,"c":{"1":null,"2":"Жайнақ Ақжан Жайнаққызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":310,"c":{"1":"40015 г. Конаев Сити Плюс","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":311,"c":{"1":279,"2":"Бирюкова Ольга Алексеевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":312,"c":{"1":280,"2":"Джумагулова Перизат Кошановна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":313,"c":{"1":281,"2":"Линцова Екатерина Александровна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":314,"c":{"1":282,"2":"Селеменьев Виталий Дмитриевич","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":315,"c":{"1":null,"2":"Сатпаев Максат Ерланович","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":316,"c":{"1":"40016 г. Талды-Корган Шаган","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":317,"c":{"1":284,"2":"Жилысбекова Загира Сабитовна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":318,"c":{"1":285,"2":"Иманбаева Марал Қайратқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":319,"c":{"1":286,"2":"Кокебаева Ботагоз Маликовна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":320,"c":{"1":287,"2":"Кульсеитова Гульназ Наурзбековна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":321,"c":{"1":288,"2":"Хасенова Марина Марзибековна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":322,"c":{"1":"40020 г.Алматы Март","2":10,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":323,"c":{"1":289,"2":"Азатқызы Айгерім","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":324,"c":{"1":290,"2":"Айтбай Диас Асқарұлы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":325,"c":{"1":291,"2":"Базаралы Ақбота Қайсаралықызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8": null,"9":null,"10":null,"11":null,"12":null}},{"r":326,"c":{"1":292,"2":"Болатова Мөлдир Айбатқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null, "9":null,"10":null,"11":null,"12":null}},{"r":327,"c":{"1":293,"2":"Жапарқұл Әнел Рүстемқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":328,"c":{"1":295,"2":"Жумағазы Анель Нурғазықызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8": null,"9":null,"10":null,"11":null,"12":null}},{"r":329,"c":{"1":296,"2":"Мұрат Айсана Бахытбекқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":330,"c":{"1":297,"2":"Рысбек Малика Ильясқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":331,"c":{"1":"40029 г. Алматы ADK","2":6,"3":null, "4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":332,"c":{"1":300,"2":"Бейсекина Еркежан Ериковна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":333,"c":{"1":301,"2":"Джауғашты Эрнар Қалдыбайұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null, "9":null,"10":null,"11":null,"12":null}},{"r":334,"c":{"1":302,"2":"Мәмешов Рахат Қуанышұлы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":335,"c":{"1":303,"2":"Муналбаев Бекслан Аманкулович","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":336,"c":{"1":304,"2":"Нұрахан Мерей Қанатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":337,"c":{"1":305,"2":"Сағидулла Избасар Сәкенұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":338,"c":{"1":"40079 г. Алматы Мерей","2":12,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":339,"c":{"1":306,"2":"Абильбекова Бахытгуль Байдировна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":340,"c":{"1":307,"2":"Асылбекова Бакытгуль Асылбекқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":341,"c":{"1":309,"2":"Дауренбекова Аяулым Сырымқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":342,"c":{"1":310,"2":"Иванова Мария Владимировна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":343,"c":{"1":311,"2":"Құрманғали Ғалиислам Маратұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":344,"c":{"1":312,"2":"Масимахун Бахтинур Авутахуновна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":345,"c":{"1":313,"2":"Охримчук Алеся Викторовна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":346,"c":{"1":314,"2":"Пухкая Елизавета Александровна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":347,"c":{"1":315,"2":"Федулова Светлана Владиславовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":348,"c":{"1":"40095 г.Алматы Магнум","2":6,"3":ноль,"4":ноль,"5":ноль,"6":ноль,"7":ноль,"8":ноль,"9":n ull,"10":null,"11":null,"12":null}},{"r":349,"c":{"1":316,"2":"Азаматқызы Аружан","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":350,"c":{"1":317,"2":"Кеңесова Гүлдана Ерболқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":351,"c":{"1":318,"2":"Мырзалым Аяулы Мырзалымқызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":352,"c":{"1":319,"2":"Сапар Айдын Ануарбекқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":353,"c":{"1":320,"2":"Сейтимбетова Кымис Букенбайқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":354,"c":{"1":"40103 г. Алматы Молл","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":355,"c":{"1":321,"2":"Акпаров Ильяс Ибрагимжанович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":356,"c":{"1":322,"2":"Калымжанов Акежан Абылайевич","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":357,"c":{"1":324,"2":"Тулепкали Саевабина Болатовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":358,"c":{"1":325,"2":"Черняка Анастасия Витальевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":359,"c":{"1":326,"2":"Шогдорова Салиха Батырбеккызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":360,"c":{"1":"40112 г.Алматы ТРК Гранд Парк","2":12,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":361,"c":{"1":327,"2":"Аксаидов Карамаддин Соатбаевич","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":362,"c":{"1":328,"2":"Ақтан Аяулым Тлеубердықызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":n ull,"9":null,"10":null,"11":null,"12":null}},{"r":363,"c":{"1":329,"2":"Анаркулова Динара Алимжановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":364,"c":{"1":330,"2":"Әділжан Сабина Бейбітқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":365,"c":{"1":331,"2":"Жамболова Әйгерим Асылбекқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null, "9":null,"10":null,"11":null,"12":null}},{"r":366,"c":{"1":332,"2":"Жомартқызы Ақниет","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":367,"c":{"1":333,"2":"Жумахметова Лаура Талгатовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":368,"c":{"1":334,"2":"Кенгесбаева Аэлита Бахытжанкызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":369,"c":{"1":335,"2":"Қуанышева Дариға Сейлханқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":370,"c":{"1":336,"2":"Мусахан Шолпан Қанатқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":nul l,"9":null,"10":null,"11":null,"12":null}},{"r":371,"c":{"1":337,"2":"Өмірзақова Аружан Жомартқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":372,"c":{"1":"40129 г. Талдыкурган ЦУМ","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":373,"c":{"1":338,"2":"Григорьева Виолетта Викторовна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":374,"c":{"1":339,"2":"Елишаева Виктория Константиновна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":375,"c":{"1":340,"2":"Нурмолдаева Аяулым Жанболатқызы","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":376,"c":{"1":342,"2":"Сулейман Ғалым Еркенұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":377,"c":{"1":343,"2":"Холдарова Гулзода Бектимир кизи","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":378,"c":{"1":null,"2":"ГородничКристина Андреевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":379,"c":{"1":"40142 Боралдай ТЦ Алатау","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":380,"c":{"1":344,"2":"Байниязова Инжигуль Жанабаевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":381,"c":{"1":345,"2":"Жұмашқызы Гаухар","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":382,"c":{"1":346,"2":"Костина Елена Сергеевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":383,"c":{"1":347,"2":"Мендьярова Гульзат Байкожаевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":384,"c":{"1":348,"2":"Умурзакова Жанна Муратовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":385,"c":{"1":349,"2":"Утеулиев Хожабек Султанбекович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":386,"c":{"1":"40148 г.Алматы ТЦ Алма","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":387,"c":{"1":350,"2":"Евдакова Диллара Юрисовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":388,"c":{"1":351,"2":"Жанасылұлы Ерасыл","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":389,"c":{"1":352,"2":"Лопатина Анастасия Вадимовна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":390,"c":{"1":354,"2":"Пономаренко Римма Шамильевна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":391,"c":{"1":"DC005 Восток","2":56,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":392,"c":{"1":"40010 г. Усть-Каменогорск Евразия","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":393,"c":{"1":357,"2":"Ахмедова Наталья Сергеевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":394,"c":{"1":358,"2":"Желудкова Милена Константиновна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":395,"c":{"1":360,"2":"Тугелова Гульзана Нурлановна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":396,"c":{"1":"40013 г. Экибастуз Центр-Строй","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":397,"c":{"1":361,"2":"Алданыш Эркеш","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":398,"c":{"1":368,"2":"Кван Алёна Вячеславовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":399,"c":{"1":362,"2":"Кван Виктория Вячеславовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":400,"c":{"1":363,"2":"Раймбеков Нуртлек Жайыкулы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":401,"c":{"1":"40028 г. Семипалатинск Аргымак","2":9,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":402,"c":{"1":366,"2":"Енсибаева Айжан Жакановна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":403,"c":{"1":367,"2":"Житибаева Айгерим Сержанқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":404,"c":{"1":368,"2":"Кабдрашитов Фархат Кабдрашитович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":405,"c":{"1":369,"2":"Қайырғажыева Айдана Қайырғажықызы","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":ноль,"6":ноль,"7":ноль,"8":ноль,"9":ноль,"10":ноль,"11":ноль,"12":null}},{"r":406,"c":{"1":370,"2":"Ларькина Елена Петровна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":407,"c":{"1":371,"2":"Мухамеджанова Рената Рашидовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":408,"c":{"1":372,"2":"Сизова Елизавета Александровна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":409,"c":{"1":789,"2":"Шаяхметов Чингиз Маратович","3":"Продавец-кассир;","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":410,"c":{"1":373,"2":"Укова Таня Рашидовна (осн.)","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":411,"c":{"1":"40051 г. Павлодар","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":412,"c":{"1":374,"2":"Жунусова Данара Даулетовна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":413,"c":{"1":375,"2":"Набиева Мадина Нұрланқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":414,"c":{"1":376,"2":"Тунгатаров Дастан Аскарович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":415,"c":{"1":377,"2":"Халиуллина Алтын Бакыткалиевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":416,"c":{"1":"40078 г. Усть-Каменогорск. ТД Тамерлан","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":417,"c":{"1":378,"2":"Батракова Юлия Александровна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":418,"c":{"1":379,"2":"Будинский Эдуардович","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":419,"c":{"1":380,"2":"Мұрал Күлжамал","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":420,"c":{"1":381,"2":"Ходанович Аделина Сергеевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":421,"c":{"1":"40080 г. Павлодар ТЦ Алсер","2":3,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":422,"c":{"1":382,"2":"Аязбаева Еркежан Қайырбекқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null, "9":null,"10":null,"11":null,"12":null}},{"r":423,"c":{"1":383,"2":"Дюсенбай Жасмина Нұрланқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":424,"c":{"1":384,"2":"Жаксылыкова Айзада Жасталаповна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":425,"c":{"1":385,"2":"Каириденова Гульжан Муратовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":426,"c":{"1":"40090 г.Семей ТЦ Апрель","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":427,"c":{"1":386,"2":"Аманжолова Жания Булатовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":428,"c":{"1":387,"2":"Кабдрашитова Алма Канатбековна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":429,"c":{"1":388,"2":"Кыдырмина Айнур Сейпиловна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":430,"c":{"1":389,"2":"Чубакова Екатерина Сергеевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":431,"c":{"1":"40108 г. Павлодар ТРЦ Батыр Mall","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":432,"c":{"1":390,"2":"Абильмахимова Жанерке Сериковна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":433,"c":{"1":391,"2":"Алиппекова Асем Ризабековна», «3»:"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":434,"c":{"1":392,"2":"Бижетова Карина Назаровна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":435,"c":{"1":393,"2":"Орынғазина Айсана Орынғазықызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":n ull,"9":null,"10":null,"11":null,"12":null}},{"r":436,"c":{"1":394,"2":"Саденова Райма Сериковна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":437,"c":{"1":395,"2":"Тунгатарова Сандүғаш Жаксыгельдықызы","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":438,"c":{"1":"40137 г.Павлодар ТД Артур","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":439,"c":{"1":396,"2":"Ермурат Дилназ Сансызбайқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":440,"c":{"1":397,"2":"Жастан Еркежан","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":441,"c":{"1":398,"2":"Крютченко Илья Петрович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":442,"c":{"1":399,"2":"Садвакасова Аружан Курмангазыевна","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":443,"c":{"1":400,"2":"Садыков Аян Олегович","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":444,"c":{"1":"40139 г.Риддер ТД \"Валентина\"","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":445,"c":{"1":401,"2":"Идиатканова Назерке Айбековна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":446,"c":{"1":402,"2":"Медведева Кристина Антоновна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":447,"c":{"1":403,"2":"Нехаенко Ксения Алексеевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":448,"c":{"1":404,"2":"Сергеева Елизавета Олеговна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":449,"c":{"1":"40170 г.Усть-Каменогорск ТРЦ Макси Торговый центр","2":6,"3":ноль,"4":ноль,"5":ноль,"6":ноль,"7":ноль,"8":ноль,"9":нуль ll,"10":null,"11":null,"12":null}},{"r":450,"c":{"1":405,"2":"Құрақпаева Айсұлу Ринатқызы","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":451,"c":{"1":406,"2":"Ногай Александра Юрьевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":452,"c":{"1":407,"2":"Нұрлан Әмина Нартайқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":453,"c":{"1":408,"2":"Саметов Беглан Ерсінұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":454,"c":{"1":409,"2":"Сексембай Айбек Жаксылықұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":455,"c":{"1":410,"2":"Сіләмова Жұлдыз Саматқызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":456,"c":{"1":411,"2":"Слямова Гүлім Саятқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":457,"c":{"1":"DC006 Алматы 2","2":57,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":458,"c":{"1":"40002 г. Алматы Праим Плаза","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":459,"c":{"1":414,"2":"Абдулмутлапова Алия Кунградбаевна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":460,"c":{"1":415,"2":"Байдилдаева Ақмоншақ Маратқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":461,"c":{"1":416,"2":"Есенгелдиев Азиз Дамирұлы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":462,"c":{"1":417,"2":"Күрішбаева Аяулым Манатқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":463,"c":{"1":418,"2":"Раимқұл Айша Аманғалиқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":464,"c":{"1":419,"2":"Сатыбалды Ұлдана Асхатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":465,"c":{"1":"40038 г. Есик ТЦ","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":466,"c":{"1":420,"2":"Аляев Анвар Таликович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":467,"c":{"1":421,"2":"Мемишева Фатима Анварбековна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":468,"c":{"1":422,"2":"Хвостикова Анжела Витальевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":469,"c":{"1":"40055 г.Талгар","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":470,"c":{"1":423,"2":"Ануарбек Жания Ержанқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":n ull,"9":null,"10":null,"11":null,"12":null}},{"r":471,"c":{"1":424,"2":"Арғын Әдемі Бахбергенқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":472,"c":{"1":426,"2":"Куандыкова Жанар Сайлауовна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":473,"c":{"1":427,"2":"Малдыбаева Рита Мухтарбаевна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":474,"c":{"1":"40057 г.Каскелен ТД Алатау","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":475,"c":{"1":429,"2":"Ардақ Ақерке Ардаққызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":476,"c":{"1":431,"2":"Болатбекова Әсем Болатбекқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":477,"c":{"1":433,"2":"Ким Анжелика Аликовна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":478,"c":{"1":434,"2":"Құрмантай Аят","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":479,"c":{"1":435,"2":«Нуримбетов Абдумалик Медгатович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":480,"c":{"1":436,"2":"Сушкова Марина Евгеньевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":481,"c":{"1":"40073 г. Алматы Арбат","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":482,"c":{"1":438,"2":"Бабко Ирина Степановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":483,"c":{"1":439,"2":"Березина Полина Александровна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":484,"c":{"1":440,"2":"Мординова Сабина Акбаровна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":485,"c":{"1":441,"2":"Семёнова Алёна Владиславовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":486,"c":{"1":"40089 г.Алматы ТЦ Максима","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":487,"c":{"1":442,"2":"Бауыржан Диляра Бауыржанқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":488,"c":{"1":443,"2":"Жақыпбекқызы Шара","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":489,"c":{"1":444,"2":"Сәрсемхан Гулмарал Баққожақызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":490,"c":{"1":445,"2":"Тыныштықбай Ақниет Қадірханқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":491,"c":{"1":"40091 г.Алматы ТЦ Атакент","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":492,"c":{"1":446,"2":"Азизова Лейла Аслановна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":493,"c":{"1":447,"2":"Ахметжанова Аяжан Бақытжанқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":494,"c":{"1":448,"2":"Даутов Бекнур Жақсылықұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null, "9":null,"10":null,"11":null,"12":null}},{"r":495,"c":{"1":449,"2":"Даутов Дархан Жақсылықұлы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":496,"c":{"1":450,"2":"Джумағазиева Ажар Дауренқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":497,"c":{"1":451,"2":"Молбосын Айдар Қайратұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":498,"c":{"1":"40119 г.Алматы Молл Апорт Восток","2":11,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":499,"c":{"1":452,"2":"Абдулжанова Ясмина Замандыновна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":500,"c":{"1":453,"2":"Айтмолда Алина Танатқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null, "9":null,"10":null,"11":null,"12":null}},{"r":501,"c":{"1":454,"2":"Әшірақын Жанель Қуатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9": null,"10":null,"11":null,"12":null}},{"r":502,"c":{"1":455,"2":"Бахавдунова Мехрибан Аликовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":503,"c":{"1":456,"2":"Жанасыл Бауыржан Жанасылұлы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":504,"c":{"1":457,"2":"Қарасай Ақерке Ержанқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":505,"c":{"1":458,"2":"Мырзайым Дильназ Жандосқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":506,"c":{"1":459,"2":"Нураддин Ләззат Нурлыбекқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":507,"c":{"1":460,"2":"Нурахметова Сабина Курванжановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":508,"c":{"1":461,"2":"Сағидолдин Бейбарс Бақытжанұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":509,"c":{"1":462,"2":"Төлбасы Диана Нұрланқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":510,"c":{"1":"40141 г. Узынагаш","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9": null,"10":null,"11":null,"12":null}},{"r":511,"c":{"1":463,"2":"Жолдасбаева Аида Айдарқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":512,"c":{"1":465,"2":"Ордабаева Арайлым Бақытқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":513,"c":{"1":466,"2":"Тұғамбай Әлібек Өміртайұлы","3":"Директор магазина 0,5","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":514,"c":{"1":467,"2":"Чурукова Дильнура Илмуратовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":515,"c":{"1":"40163 г.Алматы ТД Султан","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":516,"c":{"1":468,"2":"Аббасова Сема Эльдар кызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":517,"c":{"1":469,"2":"Аббасова Сонджульдар Кызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":518,"c":{"1":470,"2":"Абдулаева Хабиба Асымжановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":519,"c":{"1":471,"2":"Мадамбай Жасулан Канатович","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":520,"c":{"1":"40174 г.Талгар ТЦ Город Plaza","2":3,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":521,"c":{"1":472,"2":"Абайдуллаев Руслан Шаймухамедович","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":522,"c":{"1":473,"2":"Асқарұлы Мадияр","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":523,"c":{"1":474,"2":"Сметанина Анастасия Дмитриевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":524,"c":{"1":"DC007 Север","2":66,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":525,"c":{"1":"40046 г. Степногорск","2":4,"3":ноль,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":526,"c":{"1":477,"2":"Бычкова Евгения Николаевна","3":"Дектор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":527,"c":{"1":478,"2":"Васильченко Эльвира Рафаиловна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":528,"c":{"1":480,"2":"Кулинская Оксана Владимировна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":529,"c":{"1":481,"2":"Стырская Людмила Николаевна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":530,"c":{"1":482,"2":"Фурман Оксана Викторовна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":531,"c":{"1":"40060 г. Астана ТРЦ Ажар","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":532,"c":{"1":484,"2":"Досбол Гүлсара Әбдімәжітқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null, "9":null,"10":null,"11":null,"12":null}},{"r":533,"c":{"1":485,"2":"Жақсылыкова Нәзерке Сейтханқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":534,"c":{"1":486,"2":"Жапар Әнел Бахтыбекқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":535,"c":{"1":487,"2":"Кичкинтоева Гулдана Кумакбаевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":536,"c":{"1":"40062 г. Октябрь","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":537,"c":{"1":488,"2":"Аменова Мадина Темирболатовна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":538,"c":{"1":489,"2":"Гапбарова Әлима Парахатқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":539,"c":{"1":490,"2":"Талип Жания Нурланқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":540,"c":{"1":491,"2":"Төкіш Еркеназ Мақсатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":541,"c":{"1":"40075 г.Астана ТРЦ Аружан","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":n ull,"10":null,"11":null,"12":null}},{"r":542,"c":{"1":492,"2":"Амидиллаұлы Бекарыс","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":543,"c":{"1":493,"2":"Аяндыкова Карлыгаш Амангельдиновна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":544,"c":{"1":494,"2":"Косова Анастасия Дмитриевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":545,"c":{"1":495,"2":"Леоненко Виктория Анатольевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":546,"c":{"1":496,"2":"Майер Луиза Владимировна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":547,"c":{"1":497,"2":"Мамырбекова Диана Ринатқызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":548,"c":{"1":498,"2":"Сәлмен Мақсат Қайратұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":549,"c":{"1":"40086 г.Астана ТД Евразия","2":3,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":550,"c":{"1":499,"2":"Андрюшенко Александра Сергеевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":551,"c":{"1":500,"2":"Салтаев Хамид Халиллаевич","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":552,"c":{"1":501,"2":"Салтаева Дилноза Халиллаевна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":553,"c":{"1":"40105 г.Астана Small","2":3,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":554,"c":{"1":502,"2":"Аубакирова Гульмира Ерсаиновна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":555,"c":{"1":503,"2":"Ахмеди Толқын Дәулетқалиқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":nul l,"9":null,"10":null,"11":null,"12":null}},{"r":556,"c":{"1":504,"2":"Батырхан Сымбат Талгатқызы","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":557,"c":{"1":"40123 г.Астана ТЦ Центральный Рынок","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":558,"c":{"1":508,"2":"Арисхан Бердгүл","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":559,"c":{"1":509,"2":"Жамаш Еркежан Нурболатқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":560,"c":{"1":510,"2":"Ишамбул Ұлжан Әзімханқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":561,"c":{"1":511,"2":"Ишамбулова Айжан Азимхановна","3":"Администратор 0.5","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":562,"c":{"1":512,"2":"Каументаева Аружан Алимжановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":563,"c":{"1":513,"2":"Мәдиқызы Еңлік","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":564,"c":{"1":514,"2":"Ыкласов Раул Рашитович","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":565,"c":{"1":"40127 г.Астана ТЦ Алем","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":566,"c":{"1":516,"2":"Арман Аружан Арманқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":567,"c":{"1":517,"2":"Бекмырза Мерей Медетқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":568,"c":{"1":518,"2":"Берікқызы Зухра","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":569,"c":{"1":519,"2":"Камалханов Ахниет Оразханұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":570,"c":{"1":520,"2":"Кузьма Екатерина Викторовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":571,"c":{"1":486,"2":"Мақсұт Жаннұр Мақсұтқызы","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":572,"c":{"1":521,"2":"Мирзаева Сафаргуль Давроновна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":573,"c":{"1":523,"2":"Тихенко Вячеслав Викторович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":574,"c":{"1":"40130 г.Астана ТД Асем","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":575,"c":{"1":524,"2":"Адахан Асема Абдырахимқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":576,"c":{"1":525,"2":"Нұржан Дариға Ерғалиқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":577,"c":{"1":526,"2":"Тюлегенова Рената Руслановна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":578,"c":{"1":527,"2":"Устемирова Дина Кураловна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":579,"c":{"1":"40140 г.Астана ТРЦ Керуен Город","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":580,"c":{"1":528,"2":"Абдикалиева Аружан Серікқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":581,"c":{"1":529,"2":"Айдналиева Айгуль Скендеровна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":582,"c":{"1":530,"2":"Әбутәлік Қарақат Азаматқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9" :null,"10":null,"11":null,"12":null}},{"r":583,"c":{"1":531,"2":"Жеңісбекова Нұрай Қуатбекқызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":584,"c":{"1":532,"2":"Ибраева Жанель Бауыржановна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":585,"c":{"1":533,"2":"Кәрібек Ұлпан Айтбекқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":586,"c":{"1":"40150 Косши","2":4,"3":ноль,"4":ноль,"5":ноль,"6":ноль,"7":ноль,"8":ноль,"9":нуль ll,"10":null,"11":null,"12":null}},{"r":587,"c":{"1":534,"2":"Әбдіразақова Гүлнур Садыққызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null ,"9":null,"10":null,"11":null,"12":null}},{"r":588,"c":{"1":535,"2":"Калиева Ботагоз Султановна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":589,"c":{"1":536,"2":"Меткельбаева Снежана","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":590,"c":{"1":537,"2":"Таңат Айжан Болатқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":591,"c":{"1":538,"2":"Шекербек Айдана Абілқасынқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":592,"c":{"1":"40161 г.Астана ТЦ Леор","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":593,"c":{"1":539,"2":"Кемал Қарлығаш Тасанбайқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":594,"c":{"1":540,"2":"Махмудқызы Айғаным","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":595,"c":{"1":541,"2":"Серикказин Айдар Есейулы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":596,"c":{"1":542,"2":"Серикказин Батыр Тулегенович","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":597,"c":{"1":543,"2":"Тасыбаева Шакизат Мадиярқызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":598,"c":{"1":544,"2":"Шаймерден Айслу Бауыржанқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":599,"c":{"1":"40167 г.Астана ТРЦ Азия Park","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":600,"c":{"1":545,"2":"Ғалымжанұлы Думан","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":601,"c":{"1":546,"2":"Жусупова Гульдана Хайроллакызы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":602,"c":{"1":547,"2":"Испанбетова Альбина Абзаловна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":603,"c":{"1":548,"2":"Калашникова Карина Александровна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":604,"c":{"1":549,"2":"Насиханова Аружан Жаксликқызы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9 ":null,"10":null,"11":null,"12":null}},{"r":605,"c":{"1":550,"2":"Пирмаханова Эльнура Сагынаевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":606,"c":{"1":551,"2":"Хауадамова Галия Камалхановна","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":607,"c":{"1":"40172 г.Астана ТРЦ Жаннур","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":608,"c":{"1":552,"2":"Есенгелди Нұрасыл Бакдаулетұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":609,"c":{"1":553,"2":"Жагыпарова Ботакоз Олжасовна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":610,"c":{"1":554,"2":"Мадиева Айгерим Кажимуратовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":611,"c":{"1":555,"2":"Тотаева Аружан Оразбаевна","3":"Директор магазина","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":612,"c":{"1":"DC015 Запад 2","2":43,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":613,"c":{"1":"40050 г.Актау ТД Олимп","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":614,"c":{"1":557,"2":"Ермекбаев Әділ Маратұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":615,"c":{"1":558,"2":"Жуйков Сергей Алексеевич","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":616,"c":{"1":559,"2":"Куричева Ольга Викторовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":617,"c":{"1":562,"2":"Озерова Анастасия Андреевна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":618,"c":{"1":563,"2":"Озерова Наталья Алексеевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":619,"c":{"1":564,"2":"Филатова Екатерина Алексеевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":620,"c":{"1":"40067 ТЦ Лимон г.Атырау","2":6,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9": null,"10":null,"11":null,"12":null}},{"r":621,"c":{"1":566,"2":"Базаджиева Татьяна Васильевна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":622,"c":{"1":567,"2":"Бисембаева Асылай Асылбекқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null," 9":null,"10":null,"11":null,"12":null}},{"r":623,"c":{"1":568,"2":"Жардемғали Жазира Жанайысқызы","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":624,"c":{"1":569,"2":"Жаспенова Жазира Хайратовна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":625,"c":{"1":570,"2":"Куанова Камшат Алимовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":626,"c":{"1":571,"2":"Супыгалиева Алия Зейнгалиевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":627,"c":{"1":"40107 г. Актау УТК Заман","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":628,"c":{"1":572,"2":"Закиева Эльвира Миннияр кызы","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":629,"c":{"1":574,"2":"Омирбаев Талас Аманович","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":630,"c":{"1":575,"2":"Темирова Гульнар Бакимашевна","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":631,"c":{"1":576,"2":"Хыдырова Сандуғаш Жарылқапқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":632,"c":{"1":"40121 г.Актау ТРК Актау","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":633,"c":{"1":577,"2":"Багытова Айгерим Байрамбаевна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":634,"c":{"1":578,"2":"Ізімбай Ардақ Булатқызы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":635,"c":{"1":579,"2":"Қайыр Салтанат Талғатқызы","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":636,"c":{"1":580,"2":"Қарақожа Мәрлен Талғатұлы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":nu ll,"9":null,"10":null,"11":null,"12":null}},{"r":637,"c":{"1":581,"2":"Муругина Мария Сергеевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":638,"c":{"1":582,"2":"Нукусбаев Рауан Кайратұлы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":639,"c":{"1":583,"2":"Тілектес Ернұр Давутұлы","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":640,"c":{"1":null,"2":"Шамгулов Рафаэль Раисович","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":641,"c":{"1":"40133 г. Актау ТЦ Шум","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":642,"c":{"1":584,"2":"Григорьева Анастасия Владимировна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":643,"c":{"1":585,"2":"Қалжанова Илона Азаматовна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":644,"c":{"1":586,"2":"Матвеев Радмир Мекранович","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":645,"c":{"1":587,"2":"Романенко Алифия Аминқызы","3":"Продавец-консультант ювелирных изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":646,"c":{"1":588,"2":"Соколова Виктория Викторовна","3":"Декторир магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":647,"c":{"1":589,"2":"Соловьева Евгения Евгеньевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":648,"c":{"1":null,"2":"Денисова Мария Анатольевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":649,"c":{"1":"40153 г.Атырау ТД Насиха","2":7,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":650,"c":{"1":590,"2":"Алипкалиева Дильназ Болатбековна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":651,"c":{"1":591,"2":"Вертячкина Вера Вячеславовна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":652,"c":{"1":592,"2":"Лебедева Виктория Андреевна","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":653,"c":{"1":593,"2":"Солдатова Виктория Викторовна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":654,"c":{"1":594,"2":"Филиппова Надежда Николаевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":655,"c":{"1":595,"2":"Шиханцов Дмитрий Николаевич","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":656,"c":{"1":596,"2":"Шиханцова Екатерина Андреевна","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":657,"c":{"1":"40164 г.Атырау ТД Асема","2":4,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":658,"c":{"1":597,"2":"Балагутова Галина Александровна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":659,"c":{"1":598,"2":"Досқалиева Назерке Еркебұланқызы","3":"Продавец-консультант ювелирных изделий изделий","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":660,"c":{"1":599,"2":"Қалаубаев Ернар Аманкелдіұлы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8": null,"9":null,"10":null,"11":null,"12":null}},{"r":661,"c":{"1":600,"2":"Рамазан Ақтілек Алмабекұлы","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":662,"c":{"1":"40166 г.Атырау ТРК Атырау","2":5,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":663,"c":{"1":601,"2":"Баймуратова Мейрамгуль Гизатуллаевна","3":"Директор магазин","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":664,"c":{"1":602,"2":"Боос Нина Александровна","3":"Продавец-кассир","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":665,"c":{"1":603,"2":"Булатова Карина Равильқызы","3":"Продавец-консультант","4":"","5":null,"6":null,"7":null,"8":nu ll,"9":null,"10":null,"11":null,"12":null}},{"r":666,"c":{"1":604,"2":"Жулдасова Алтынай Руслановна","3":"Парт-таймер","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}},{"r":667,"c":{"1":605,"2":"Лапеденов Аян Дидарұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}}];"Лапеденов Аян Дидарұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}}];"Лапеденов Аян Дидарұлы","3":"Администратор","4":"","5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null}}];
 
-асинхронная функция exportXLSX() {
+async function exportXLSX() {
   // Сначала загружаем свежие данные из Firebase
   if (window._firebaseReady) {
     showToast('Загрузка данных из Firebase...');
@@ -1603,7 +1603,7 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
     const noChanges = {};
     Object.entries(firestoreData).forEach(([k, d]) => {
       if (d.submittedAt) submitted[k] = d.submittedAt;
-      если (d.noChangesAt) noChanges[k] = d.noChangesAt;
+      if (d.noChangesAt) noChanges[k] = d.noChangesAt;
       if (d.firedData) firedData[k] = d.firedData;
     });
     localStorage.setItem('submittedStores', JSON.stringify(submitted));
@@ -1624,7 +1624,7 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
   const ws = wb.addWorksheet('TDSheet');
 
   ws.columns = [
-    { ширина: 40 }, { ширина: 20 }, { ширина: 30 },
+    { width: 40 }, { width: 20 }, { width: 30 },
     { width: 20 }, { width: 18 }, { width: 12 }, { width: 16 }
   ];
 
@@ -1642,7 +1642,7 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
       const statusOverride = getStatusOverrideByKey(storeKey, empKey);
       const date = getFiredValueByKey(storeKey, empKey);
       const baseStatus =normalizeStatus(emp.status);
-      const effectStatus = statusOverride || базовый статус;
+      const effectStatus = statusOverride || baseStatus;
       if (statusOverride || date || effectStatus === 'Уволен') {
         if (!storeOverrides[storeKey]) storeOverrides[storeKey] = {};
         // Сохраняем и под числовым ключом и под empKey
@@ -1697,7 +1697,7 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
           if (fd && fd.status) finalStatus = normalizeStatus(fd.status);
         }
 
-        if (finalStatus === 'Работает')workCount++;
+        if (finalStatus === 'Работает')workingCount++;
         if (finalStatus === 'Уволен') firedCount++;
       }
     });
@@ -1713,7 +1713,7 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
   const divStoreSheetRows = {};
   let currentStoreKey = null;
 
-  // Вспомогательная функция для применения стиля
+  // Вспомогательная function для применения стиля
   const applyStyle = (wsRow, fillColor) => {
     wsRow.eachCell({ includeEmpty: true }, cell => {
       cell.font = { name: 'Calibri', size: 9 };
@@ -1801,12 +1801,12 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
 
       // Форматируемые даты: ГГГГ-ММ-ДД → ДД.ММ.ГГГГ
       const formatDate = (d) => {
-        если (!d) вернуть '';
+        if (!d) return '';
         if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
           const [y, m, dd] = d.split('-');
           return `${dd}.${m}.${y}`;
         }
-        вернуть d;
+        return d;
       };
 
       values[3] = finalStatus;
@@ -1887,10 +1887,10 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
         const sumC = divSheetRows.map(d => `C${d}`).join(',');
         const sumD = divSheetRows.map(d => `D${d}`).join(',');
         const sumE = divSheetRows.map(d => `E${d}`).join(',');
-        row.getCell(2).value = { формула: `SUM(${sumB})` }; // ШР итого
-        row.getCell(3).value = { формула: `SUM(${sumC})` }; // Работало всего
-        row.getCell(4).value = { формула: `SUM(${sumD})` }; // Работает
-        row.getCell(5).value = { формула: `SUM(${sumE})` }; // Уволены
+        row.getCell(2).value = { formula: `SUM(${sumB})` }; // ШР итого
+        row.getCell(3).value = { formula: `SUM(${sumC})` }; // Работало всего
+        row.getCell(4).value = { formula: `SUM(${sumD})` }; // Работает
+        row.getCell(5).value = { formula: `SUM(${sumE})` }; // Уволены
         row.getCell(6).value = { formula: `IFERROR(E${r}/C${r},0)` }; // % текучки
         row.getCell(7).value = { Formula: `IFERROR(D${r}/B${r},0)` }; // % заполненности
         row.getCell(6).numFmt = '0.00%';
@@ -1907,8 +1907,8 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
   // --- СПИСОК 2: Итоги ---
   const ws2 = wb.addWorksheet('Итоги');
   ws2.columns = [
-    { ширина: 40 }, { ширина: 14 }, { ширина: 18 }, { ширина: 16 },
-    { ширина: 10 }, { ширина: 12 }, { ширина: 16 }
+    { width: 40 }, { width: 14 }, { width: 18 }, { width: 16 },
+    { width: 10 }, { width: 12 }, { width: 16 }
   ];
 
   const hdrs2 = ['№ п/п','ШР на текущий месяц','Работало всего за текущий месяц',
@@ -1938,7 +1938,7 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
   Object.entries(divStoreSheetRows).forEach(([dcName, storeSheetRowNums]) => {
     if (!storeSheetRowNums.length) return;
     const shortName = dcName.replace(/^DC\d+\s+/, '').trim();
-    Пусть B=0, C=0, D=0, E=0;
+    let B=0, C=0, D=0, E=0;
     // Сопоставить значения строк таблицы storeSheetRowNums с исходным значением storeR
     allStoreRows.forEach(storeR => {
       if (storeSheetRowNums.includes(sourceToSheetRow[storeR])) {
@@ -2040,7 +2040,7 @@ const EXCEL_ROWS = [{"r":1,"c":{"1":"№ п/п","2":"ШР на текущий м
 
 function saveWebhook() {
   const url = document.getElementById('webhook-input').value.trim();
-  if (!url) { showToast('Введите URL!', 'error'); возвращаться; }
+  if (!url) { showToast('Введите URL!', 'error'); return; }
   localStorage.setItem('webhookUrl', URL);
   document.getElementById('webhook-input').value = '';
   document.getElementById('webhook-status').textContent = ' ✅ Сохранён: ' + url.substring(0, 40) + '...';
@@ -2048,7 +2048,7 @@ function saveWebhook() {
 }
 
 // Администратор
-асинхронная функция buildAdminSidebar() {
+async function buildAdminSidebar() {
   const list = document.getElementById('store-sidebar-list');
   list.innerHTML = '<div style="color:var(--muted);font-size:0.8rem;padding:1rem 0;">⏳ Загрузка данных...</div>';
 
@@ -2068,7 +2068,7 @@ function saveWebhook() {
     const noChanges = {};
     Object.entries(firestoreData).forEach(([k, d]) => {
       if (d.submittedAt) submitted[k] = d.submittedAt;
-      если (d.noChangesAt) noChanges[k] = d.noChangesAt;
+      if (d.noChangesAt) noChanges[k] = d.noChangesAt;
       if (d.firedData) {
         firedData[k] = d.firedData;
       }
@@ -2096,11 +2096,11 @@ function saveWebhook() {
       const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
       const override = getStatusOverrideByKey(k, empKey);
       return override === 'Уволен' || (!override &&normalizeStatus(e.status) === 'Уволен');
-    }).длина;
+    }).length;
     const isSubmitted = !!submitted[k];
     const isNoChange = !!noChanges[k];
     const submittedAt = isSubmitted ? new Date(submitted[k]).toLocaleDateString('ru-RU') : null;
-    const noChangeAt = isNoChange? новая дата(noChanges[k]).toLocaleDateString('ru-RU'): null;
+    const noChangeAt = isNoChange? new Date(noChanges[k]).toLocaleDateString('ru-RU'): null;
     const email = EMAIL_MAP[k] || '';
     const el = document.createElement('div');
     el.className = 'store-list-item' + (isSubmitted || isNoChange ? ' status-done' : ' status-pending');
@@ -2160,22 +2160,22 @@ function openAdminStore(storeKey) {
     const empKey = e.num !== null && e.num !== undefined ? String(e.num) : 'name_' + e.name.replace(/\s+/g, '_');
     const override = getStatusOverrideByKey(storeKey, empKey);
     return override === 'Уволен' || (!override &&normalizeStatus(e.status) === 'Уволен');
-  }).длина;
+  }).length;
   const total = store.employees.length;
 
   let rows = store.employees.map(emp => {
     const empKey = emp.num !== null && emp.num !== undefined ? String(emp.num) : 'name_' + emp.name.replace(/\s+/g, '_');
     const statusOverride = getStatusOverrideByKey(storeKey, empKey);
     const baseStatus =normalizeStatus(emp.status);
-    константный статус = statusOverride || базовый статус;
+    const статус = statusOverride || baseStatus;
     const rawDate = getFiredValueByKey(storeKey, empKey) || '';
-    // Конвертируемая дата: ГГГГ-ММ-ДД → ДД.ММ.ГГГГ
+    // Конвертируемая date: ГГГГ-ММ-ДД → ДД.ММ.ГГГГ
     let date = '—';
     if (rawDate) {
       if (/^\d{4}-\d{2}-\d{2}$/.test(rawDate)) {
         const [y, m, d] = rawDate.split('-');
         дата = `${d}.${m}.${y}`;
-      } еще {
+      } else {
         дата = rawDate;
       }
     }
@@ -2187,12 +2187,12 @@ function openAdminStore(storeKey) {
       <td style="color:${isFired ? 'var(--danger)' : 'var(--success)'}">${isFired ? '✕ Уволен' : 'ا Работает'</td>
       <td style="color:${date !== '—' ? 'var(--text)' 'var(--muted)'}">${date}</td>
     </tr>`;
-  }).присоединиться('');
+  }).join('');
 
   view.innerHTML = `
     <div style="margin-bottom:1.5rem">
       <h2 style="font-family:var(--font-head);font-size:1.1rem;margin-bottom:0.3rem">${storeKey}</h2>
-      <p style="color:var(--muted);font-size:0.85rem">Директор: ${store.director</p>
+      <p style="color:var(--muted);font-size:0.85rem">Директор: ${store.director}</p>
     </div>
     <div class="stats-row" style="margin-bottom:1.5rem">
       <div class="stat-card"><div class="stat-label">Сотрудники</div><div class="stat-value yellow">${total}</div></div>
@@ -2219,13 +2219,14 @@ function showToast(msg, type) {
 // Инициализация после загрузки всего HTML и скриптов
 loadSavedData();
 populateStoreSelect();
+toggleLoginType(); // Устанавливаем правильное состояние формы при загрузке
 
 // Автообновление данных для администратора головы 30 секунд
 let _adminRefreshTimer = null;
 let _adminRefreshCountdown = 30;
 let _adminCountdownTimer = null;
 
-функция startAdminAutoRefresh() {
+function startAdminAutoRefresh() {
   stopAdminAutoRefresh();
 
   // Таймер обновления новостей 30 сек.
@@ -2242,7 +2243,7 @@ let _adminCountdownTimer = null;
     const adminScreen = document.getElementById('admin-screen');
     if (!adminScreen || !adminScreen.classList.contains('active')) return;
     _adminRefreshCountdown--;
-    Если (_adminRefreshCountdown <= 0), то _adminRefreshCountdown = 30;
+    if (_adminRefreshCountdown <= 0), то _adminRefreshCountdown = 30;
     const btn = document.querySelector('[onclick="buildAdminSidebar()"]');
     if (btn) btn.textContent = `🔄 Обновить (${_adminRefreshCountdown}с)`;
   }, 1000);
