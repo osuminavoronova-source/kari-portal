@@ -844,6 +844,7 @@
       <div class="director-chip" style="background:rgba(232,197,71,0.12);border-color:rgba(232,197,71,0.3);color:var(--accent)">Администратор</div>
       <button class="btn-export" onclick="openPasswordManager()" style="margin-right:8px">🔑 Пароли</button>
       <button class="btn-export" onclick="exportXLSX().catch(e=>showToast('Ошибка экспорта','error'))" style="margin-right:8px">⬇ Скачать XLSX</button>
+      <button class="btn-export" onclick="resetAllFirebaseData()" style="margin-right:8px;background:rgba(239,68,68,0.2);border-color:rgba(239,68,68,0.4);color:#ef4444">🗑 Сбросить все данные</button>
       <button class="btn-logout" onclick="logout()">Выйти</button>
     </div>
   </header>
@@ -1147,6 +1148,35 @@ function login() {
   currentStore = storeKey;
   showScreen('app-screen');
   buildDirectorView(storeKey);
+}
+
+async function resetAllFirebaseData() {
+  if (!confirm('⚠️ Вы уверены? Все данные об увольнениях и статусы из Firebase будут удалены безвозвратно!')) return;
+  if (!confirm('Подтвердите ещё раз: удалить ВСЕ данные отчётов из Firebase?')) return;
+
+  if (!window._db) { showToast('Firebase не подключён!', 'error'); return; }
+
+  showToast('Удаляю данные из Firebase...', 'error');
+  
+  try {
+    const { deleteDoc, doc } = await import('https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js');
+    let deleted = 0;
+    for (const storeKey of STORE_KEYS) {
+      try {
+        const safeId = storeKey.replace(/"/g, '').replace(/\s+/g, '_').substring(0, 80);
+        await deleteDoc(doc(window._db, 'reports', safeId));
+        deleted++;
+      } catch(e) {}
+    }
+    // Clear localStorage too
+    localStorage.removeItem('firedData');
+    localStorage.removeItem('submittedStores');
+    localStorage.removeItem('noChangesStores');
+    showToast('Все данные удалены! Перезагружаю...', 'error');
+    setTimeout(() => location.reload(), 2000);
+  } catch(e) {
+    showToast('Ошибка: ' + e.message, 'error');
+  }
 }
 
 function logout() {
