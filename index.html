@@ -1154,29 +1154,35 @@ async function resetAllFirebaseData() {
   if (!confirm('⚠️ Вы уверены? Все данные об увольнениях и статусы из Firebase будут удалены безвозвратно!')) return;
   if (!confirm('Подтвердите ещё раз: удалить ВСЕ данные отчётов из Firebase?')) return;
 
-  if (!window._db) { showToast('Firebase не подключён!', 'error'); return; }
-
-  showToast('Удаляю данные из Firebase...', 'error');
-  
-  try {
-    const { deleteDoc, doc } = await import('https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js');
-    let deleted = 0;
-    for (const storeKey of STORE_KEYS) {
-      try {
-        const safeId = storeKey.replace(/"/g, '').replace(/\s+/g, '_').substring(0, 80);
-        await deleteDoc(doc(window._db, 'reports', safeId));
-        deleted++;
-      } catch(e) {}
-    }
-    // Clear localStorage too
-    localStorage.removeItem('firedData');
-    localStorage.removeItem('submittedStores');
-    localStorage.removeItem('noChangesStores');
-    showToast('Все данные удалены! Перезагружаю...', 'error');
-    setTimeout(() => location.reload(), 2000);
-  } catch(e) {
-    showToast('Ошибка: ' + e.message, 'error');
+  if (!window._db || !window._fsSetDoc || !window._fsDoc) {
+    showToast('Firebase не подключён!', 'error'); return;
   }
+
+  showToast('Сбрасываю данные...', 'error');
+  let done = 0;
+
+  for (const storeKey of STORE_KEYS) {
+    try {
+      const safeId = storeKey.replace(/"/g, '').replace(/\s+/g, '_').substring(0, 80);
+      const docRef = window._fsDoc(window._db, 'reports', safeId);
+      await window._fsSetDoc(docRef, {
+        firedData: {},
+        submittedAt: null,
+        noChangesAt: null,
+        firedCount: 0,
+        reset: true
+      });
+      done++;
+    } catch(e) { console.error(storeKey, e); }
+  }
+
+  // Clear localStorage
+  localStorage.removeItem('firedData');
+  localStorage.removeItem('submittedStores');
+  localStorage.removeItem('noChangesStores');
+
+  showToast('Готово! Сброшено ' + done + ' магазинов. Обновляю...', 'error');
+  setTimeout(() => location.reload(), 2000);
 }
 
 function logout() {
