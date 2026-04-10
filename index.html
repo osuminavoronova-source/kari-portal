@@ -844,6 +844,7 @@
       <div class="director-chip" style="background:rgba(232,197,71,0.12);border-color:rgba(232,197,71,0.3);color:var(--accent)">Администратор</div>
       <button class="btn-export" onclick="openPasswordManager()" style="margin-right:8px">🔑 Пароли</button>
       <button class="btn-export" onclick="exportXLSX().catch(e=>showToast('Ошибка экспорта','error'))" style="margin-right:8px">⬇ Скачать XLSX</button>
+      <button class="btn-export" onclick="remindNotSubmitted()" style="margin-right:8px;background:rgba(239,68,68,0.2);border-color:rgba(239,68,68,0.4);color:#ef4444">📢 Напомнить незаполнившим</button>
       <button class="btn-logout" onclick="logout()">Выйти</button>
     </div>
   </header>
@@ -1147,6 +1148,64 @@ function login() {
   currentStore = storeKey;
   showScreen('app-screen');
   buildDirectorView(storeKey);
+}
+
+async function remindNotSubmitted() {
+  if (!window._db) { showToast('Firebase не подключён!', 'error'); return; }
+  
+  showToast('Проверяю кто не сдал...', 'error');
+  
+  try {
+    // Get all store keys from STORES object
+    const allStores = Object.keys(STORES);
+    
+    // Get submitted stores from Firebase
+    const { collection, getDocs } = await import('https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js');
+    const querySnapshot = await getDocs(collection(window._db, 'reports'));
+    
+    // Build set of submitted store safe IDs
+    const submittedIds = new Set();
+    querySnapshot.forEach(doc => submittedIds.add(doc.id));
+    
+    // Find not submitted stores
+    const notSubmitted = allStores.filter(sk => {
+      const safeId = sk.replace(/"/g, '').replace(/\s+/g, '_').substring(0, 80);
+      const data = querySnapshot.docs.find(d => d.id === safeId);
+      if (!data) return true; // not in Firebase at all
+      const d = data.data();
+      // Not submitted if no submittedAt and no noChangesAt
+      return !d.submittedAt && !d.noChangesAt;
+    });
+    
+    if (notSubmitted.length === 0) {
+      showToast('Все магазины сдали отчёт! 🎉', 'error');
+      return;
+    }
+    
+    // Format list - show only store number (first 5 chars)
+    const storeList = notSubmitted.map(sk => sk.substring(0, 5)).join(', ');
+    const msg = `⚠️ Напоминание КАРИ КЗ\n\nСледующие магазины ещё не сдали отчёт:\n${storeList}\n\n👉 https://osuminavoronova-source.github.io/kari-portal/\n\nСрок: сегодня до 12:00`;
+    
+    // Send to Telegram
+    const resp = await fetch(`https://api.telegram.org/bot8246894229:AAHfY9w0IOLbhlA3XaDY1rdqLVP1IyGzB54/sendMessage`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        chat_id: '-5244389139',
+        text: msg
+      })
+    });
+    
+    const result = await resp.json();
+    if (result.ok) {
+      showToast(`Отправлено! Не сдали: ${notSubmitted.length} магазинов`, 'error');
+    } else {
+      showToast('Ошибка отправки: ' + result.description, 'error');
+    }
+  } catch(e) {
+    showToast('Ошибка: ' + e.message, 'error');
+    console.error(e);
+  }
 }
 
 function logout() {
