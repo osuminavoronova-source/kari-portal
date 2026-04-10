@@ -1167,15 +1167,20 @@ async function remindNotSubmitted() {
     const submittedIds = new Set();
     querySnapshot.forEach(doc => submittedIds.add(doc.id));
     
+    // Build map of submitted store IDs
+    const submittedMap = {};
+    querySnapshot.forEach(doc => {
+      const d = doc.data();
+      // считаем сданным если есть submittedAt или noChangesAt
+      if ((d.submittedAt && d.submittedAt !== null) || (d.noChangesAt && d.noChangesAt !== null)) {
+        submittedMap[doc.id] = true;
+      }
+    });
+    
     // Find not submitted stores
     const notSubmitted = allStores.filter(sk => {
       const safeId = sk.replace(/"/g, '').replace(/\s+/g, '_').substring(0, 80);
-      const data = querySnapshot.docs.find(d => d.id === safeId);
-      if (!data) return true; // not in Firebase = not submitted
-      const d = data.data();
-      // Submitted if has submittedAt OR noChangesAt
-      const isSubmitted = (d.submittedAt && d.submittedAt !== null) || (d.noChangesAt && d.noChangesAt !== null);
-      return !isSubmitted; // return true = NOT submitted
+      return !submittedMap[safeId]; // not in submitted map = not submitted
     });
     
     if (notSubmitted.length === 0) {
