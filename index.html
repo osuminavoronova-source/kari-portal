@@ -1171,10 +1171,11 @@ async function remindNotSubmitted() {
     const notSubmitted = allStores.filter(sk => {
       const safeId = sk.replace(/"/g, '').replace(/\s+/g, '_').substring(0, 80);
       const data = querySnapshot.docs.find(d => d.id === safeId);
-      if (!data) return true; // not in Firebase at all
+      if (!data) return true; // not in Firebase = not submitted
       const d = data.data();
-      // Not submitted if no submittedAt and no noChangesAt
-      return !d.submittedAt && !d.noChangesAt;
+      // Submitted if has submittedAt OR noChangesAt
+      const isSubmitted = (d.submittedAt && d.submittedAt !== null) || (d.noChangesAt && d.noChangesAt !== null);
+      return !isSubmitted; // return true = NOT submitted
     });
     
     if (notSubmitted.length === 0) {
