@@ -1183,6 +1183,16 @@ async function remindNotSubmitted() {
       return !submittedMap[safeId]; // not in submitted map = not submitted
     });
     
+    // DEBUG: show what Firebase returned
+    const firebaseIds = [];
+    querySnapshot.forEach(doc => firebaseIds.push(doc.id));
+    console.log('Firebase docs:', firebaseIds.slice(0, 3));
+    console.log('submittedMap keys:', Object.keys(submittedMap).slice(0, 3));
+    const testStore = allStores[0];
+    const testSafeId = testStore.replace(/\//g, '_').replace(/\\/g, '_');
+    console.log('Test store:', testStore, '-> safeId:', testSafeId);
+    console.log('In submittedMap:', submittedMap[testSafeId]);
+    
     if (notSubmitted.length === 0) {
       showToast('Все магазины сдали отчёт! 🎉', 'error');
       return;
