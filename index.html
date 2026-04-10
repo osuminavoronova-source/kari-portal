@@ -1179,7 +1179,7 @@ async function remindNotSubmitted() {
     
     // Find not submitted stores
     const notSubmitted = allStores.filter(sk => {
-      const safeId = sk.replace(/"/g, '').replace(/\s+/g, '_').substring(0, 80);
+      const safeId = sk.replace(/\//g, '_').replace(/\\/g, '_');
       return !submittedMap[safeId]; // not in submitted map = not submitted
     });
     
