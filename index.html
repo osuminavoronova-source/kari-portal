@@ -605,8 +605,8 @@
   @media (max-width: 768px) {
     .admin-grid { display: flex; flex-direction: column; }
     .admin-sidebar { display: block !important; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
-    .admin-content { display: none; }
-    .admin-content.mobile-active { display: block; }
+    .admin-content { display: none !important; }
+    .admin-content.mobile-active { display: block !important; }
     .admin-sidebar.mobile-hidden { display: none !important; }
     .mobile-back-btn { display: flex !important; }
     .app-main { padding: 0.75rem; }
@@ -2223,52 +2223,22 @@ function isMobile() {
   return window.innerWidth <= 768;
 }
 
-// Initialize mobile state
-function initMobileLayout() {
-  if (!isMobile()) return;
-  const contentPanel = document.getElementById('admin-content-panel');
-  if (contentPanel) contentPanel.style.display = 'none';
-}
-
-// Call on load
-window.addEventListener('load', initMobileLayout);
-window.addEventListener('resize', function() {
-  if (!isMobile()) {
-    // Reset to desktop layout
-    const sidebar = document.querySelector('.admin-sidebar');
-    const contentPanel = document.getElementById('admin-content-panel');
-    if (sidebar) sidebar.style.display = '';
-    if (contentPanel) contentPanel.style.display = '';
-    const backBtn = document.querySelector('.mobile-back-btn');
-    if (backBtn) backBtn.style.display = 'none';
-  }
-});
-
 function mobileGoBack() {
   const sidebar = document.querySelector('.admin-sidebar');
   const contentPanel = document.getElementById('admin-content-panel');
-  if (sidebar) {
-    sidebar.style.display = '';
-  }
-  if (contentPanel) {
-    contentPanel.style.display = 'none';
-  }
-  window.scrollTo(0, 0);
+  if (sidebar) sidebar.classList.remove('mobile-hidden');
+  if (contentPanel) contentPanel.classList.remove('mobile-active');
 }
 
 function mobileOpenStore() {
-  if (window.innerWidth > 768) return;
+  if (!isMobile()) return;
   const sidebar = document.querySelector('.admin-sidebar');
   const contentPanel = document.getElementById('admin-content-panel');
-  if (sidebar) {
-    sidebar.style.display = 'none';
-  }
-  if (contentPanel) {
-    contentPanel.style.display = 'block';
-  }
+  if (sidebar) sidebar.classList.add('mobile-hidden');
+  if (contentPanel) contentPanel.classList.add('mobile-active');
+  // Show back button
   const backBtn = document.querySelector('.mobile-back-btn');
   if (backBtn) backBtn.style.display = 'flex';
-  window.scrollTo(0, 0);
 }
 </script>
 </body>
