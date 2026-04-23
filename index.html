@@ -1925,6 +1925,11 @@ async function exportXLSX() {
   const kzRow2 = ws2.addRow(['КЗ', kzB, kzC, kzD, kzE, kzC>0?kzE/kzC:0, kzB>0?kzD/kzB:0]);
   styleRow2(kzRow2, COLOR_BLUE, true); addPct(kzRow2);
 
+  summaryData.sort((a, b) => {
+    const pctA = a.C > 0 ? a.E / a.C : 0;
+    const pctB = b.C > 0 ? b.E / b.C : 0;
+    return pctB - pctA;
+  });
   summaryData.forEach(d => {
     const row = ws2.addRow([d.name, d.B, d.C, d.D, d.E, d.C>0?d.E/d.C:0, d.B>0?d.D/d.B:0]);
     styleRow2(row, COLOR_ORANGE, false); addPct(row);
@@ -1936,13 +1941,20 @@ async function exportXLSX() {
   storeHdrRow.eachCell({ includeEmpty:true }, styleHdr2);
   storeHdrRow.height = 36;
 
-  allStoreRows.forEach(storeR => {
-    const name = String(storeRowMap[storeR]);
-    const B = SHR_MAP[name]              || 0;
-    const C = storeEmpCount[storeR]      || 0;
-    const D = storeWorkingCount[storeR]  || 0;
-    const E = storeFiredCount[storeR]    || 0;
-    const row = ws2.addRow([name, B, C, D, E, C>0?E/C:0, B>0?D/B:0]);
+  const storeRowsData = allStoreRows.map(storeR => ({
+    name: String(storeRowMap[storeR]),
+    B: SHR_MAP[String(storeRowMap[storeR])] || 0,
+    C: storeEmpCount[storeR]     || 0,
+    D: storeWorkingCount[storeR] || 0,
+    E: storeFiredCount[storeR]   || 0,
+  }));
+  storeRowsData.sort((a, b) => {
+    const pctA = a.C > 0 ? a.E / a.C : 0;
+    const pctB = b.C > 0 ? b.E / b.C : 0;
+    return pctB - pctA;
+  });
+  storeRowsData.forEach(d => {
+    const row = ws2.addRow([d.name, d.B, d.C, d.D, d.E, d.C>0?d.E/d.C:0, d.B>0?d.D/d.B:0]);
     styleRow2(row, COLOR_GREEN, false); addPct(row);
   });
 
@@ -2100,6 +2112,7 @@ function filterSidebar() {
 }
 
 function openAdminStore(storeKey) {
+  mobileOpenStore();
   document.querySelectorAll('.store-list-item').forEach(el => el.classList.remove('active'));
   document.querySelector(`[data-store="${CSS.escape(storeKey)}"]`)?.classList.add('active');
 
@@ -2155,16 +2168,6 @@ function openAdminStore(storeKey) {
       </table>
     </div>
   `;
-
-  // Теперь контент готов — переключаем экран на мобильном
-  if (window.innerWidth <= 900) {
-    var src = document.getElementById('admin-store-view');
-    var dst = document.getElementById('mobile-store-content');
-    var titleEl = document.getElementById('mobile-store-title');
-    if (src && dst) dst.innerHTML = src.innerHTML;
-    if (titleEl) titleEl.textContent = storeKey.substring(0, 15);
-    showScreen('mobile-store-screen');
-  }
 }
 
 function showToast(msg, type) {
@@ -2246,15 +2249,20 @@ logout = function() {
 
 
 
-
-
-
-
-
-
 function isMobile() { return window.innerWidth <= 900; }
-function mobileOpenStore() { /* вызов встроен в openAdminStore */ }
-function mobileGoBack() { showScreen('admin-screen'); }
+
+function mobileOpenStore() {
+  if (!isMobile()) return;
+  // Копируем контент из admin-store-view в мобильный экран
+  var src = document.getElementById('admin-store-view');
+  var dst = document.getElementById('mobile-store-content');
+  if (src && dst) dst.innerHTML = src.innerHTML;
+  showScreen('mobile-store-screen');
+}
+
+function mobileGoBack() {
+  showScreen('admin-screen');
+}
 </script>
 </body>
 </html>
