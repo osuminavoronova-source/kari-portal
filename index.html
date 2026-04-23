@@ -604,8 +604,7 @@
 
   @media (max-width: 768px) {
     .admin-grid { display: flex; flex-direction: column; }
-    .admin-sidebar { display: block; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
-    .admin-sidebar.mobile-hidden { display: none !important; }
+    .admin-sidebar { display: block !important; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
     .mobile-back-btn { display: none; width: 100%; margin-bottom: 1rem; }
     .app-main { padding: 0.75rem; }
     .app-header { padding: 0.75rem 1rem; }
@@ -633,12 +632,6 @@
     .stats-row { grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
     .stat-value { font-size: 1.4rem; }
     .stat-label { font-size: 0.65rem; }
-
-    /* Мобильное переключение сайдбар ↔ контент */
-    .admin-content { display: none !important; }
-    .admin-content.mobile-active { display: block !important; }
-    .mobile-back-btn { display: none !important; }
-    .mobile-back-btn.visible { display: flex !important; }
   }
 </style>
 </head>
@@ -2100,7 +2093,16 @@ function filterSidebar() {
 }
 
 function openAdminStore(storeKey) {
-  mobileOpenStore();
+  // Мобильное переключение — жёстко через style, игнорируем CSS
+  if (window.innerWidth <= 768) {
+    var sidebar = document.querySelector('.admin-sidebar');
+    var panel = document.getElementById('admin-content-panel');
+    var backBtn = document.querySelector('.mobile-back-btn');
+    if (sidebar) { sidebar.style.cssText = 'display:none!important'; }
+    if (panel) { panel.style.cssText = 'display:block!important'; }
+    if (backBtn) { backBtn.style.cssText = 'display:flex!important'; }
+    window.scrollTo(0,0);
+  }
   document.querySelectorAll('.store-list-item').forEach(el => el.classList.remove('active'));
   document.querySelector(`[data-store="${CSS.escape(storeKey)}"]`)?.classList.add('active');
 
@@ -2232,9 +2234,9 @@ function mobileOpenStore() {
   var sidebar = document.querySelector('.admin-sidebar');
   var panel = document.getElementById('admin-content-panel');
   var backBtn = document.querySelector('.mobile-back-btn');
-  if (sidebar) sidebar.classList.add('mobile-hidden');
-  if (panel) panel.classList.add('mobile-active');
-  if (backBtn) backBtn.classList.add('visible');
+  if (sidebar) sidebar.style.setProperty('display','none','important');
+  if (panel) panel.style.setProperty('display','block','important');
+  if (backBtn) backBtn.style.setProperty('display','flex','important');
   window.scrollTo(0,0);
 }
 
@@ -2242,13 +2244,17 @@ function mobileGoBack() {
   var sidebar = document.querySelector('.admin-sidebar');
   var panel = document.getElementById('admin-content-panel');
   var backBtn = document.querySelector('.mobile-back-btn');
-  if (sidebar) sidebar.classList.remove('mobile-hidden');
-  if (panel) panel.classList.remove('mobile-active');
-  if (backBtn) backBtn.classList.remove('visible');
+  if (sidebar) sidebar.style.removeProperty('display');
+  if (panel) panel.style.setProperty('display','none','important');
+  if (backBtn) backBtn.style.removeProperty('display');
   window.scrollTo(0,0);
 }
 
-
+window.addEventListener('load', function() {
+  if (!isMobile()) return;
+  var panel = document.getElementById('admin-content-panel');
+  if (panel) panel.style.setProperty('display','none','important');
+});
 </script>
 </body>
 </html>
