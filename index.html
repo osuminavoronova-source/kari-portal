@@ -603,8 +603,9 @@
   }
 
   @media (max-width: 768px) {
-    .admin-grid { display: flex; flex-direction: column; }
-    .admin-sidebar { display: block !important; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
+    .admin-grid { display: block; }
+    .admin-sidebar { display: block; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
+    .admin-content { display: none; }
     .mobile-back-btn { display: none; width: 100%; margin-bottom: 1rem; }
     .app-main { padding: 0.75rem; }
     .app-header { padding: 0.75rem 1rem; }
@@ -2093,16 +2094,7 @@ function filterSidebar() {
 }
 
 function openAdminStore(storeKey) {
-  // Мобильное переключение — жёстко через style, игнорируем CSS
-  if (window.innerWidth <= 768) {
-    var sidebar = document.querySelector('.admin-sidebar');
-    var panel = document.getElementById('admin-content-panel');
-    var backBtn = document.querySelector('.mobile-back-btn');
-    if (sidebar) { sidebar.style.cssText = 'display:none!important'; }
-    if (panel) { panel.style.cssText = 'display:block!important'; }
-    if (backBtn) { backBtn.style.cssText = 'display:flex!important'; }
-    window.scrollTo(0,0);
-  }
+  mobileOpenStore();
   document.querySelectorAll('.store-list-item').forEach(el => el.classList.remove('active'));
   document.querySelector(`[data-store="${CSS.escape(storeKey)}"]`)?.classList.add('active');
 
@@ -2227,6 +2219,18 @@ logout = function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 function isMobile() { return window.innerWidth <= 768; }
 
 function mobileOpenStore() {
@@ -2234,27 +2238,29 @@ function mobileOpenStore() {
   var sidebar = document.querySelector('.admin-sidebar');
   var panel = document.getElementById('admin-content-panel');
   var backBtn = document.querySelector('.mobile-back-btn');
-  if (sidebar) sidebar.style.setProperty('display','none','important');
-  if (panel) panel.style.setProperty('display','block','important');
-  if (backBtn) backBtn.style.setProperty('display','flex','important');
-  window.scrollTo(0,0);
+  if (sidebar) sidebar.style.display = 'none';
+  if (panel) panel.style.display = 'block';
+  if (backBtn) backBtn.style.display = 'flex';
+  window.scrollTo(0, 0);
 }
 
 function mobileGoBack() {
   var sidebar = document.querySelector('.admin-sidebar');
   var panel = document.getElementById('admin-content-panel');
   var backBtn = document.querySelector('.mobile-back-btn');
-  if (sidebar) sidebar.style.removeProperty('display');
-  if (panel) panel.style.setProperty('display','none','important');
-  if (backBtn) backBtn.style.removeProperty('display');
-  window.scrollTo(0,0);
+  if (sidebar) sidebar.style.display = 'block';
+  if (panel) panel.style.display = 'none';
+  if (backBtn) backBtn.style.display = 'none';
+  window.scrollTo(0, 0);
 }
 
-window.addEventListener('load', function() {
-  if (!isMobile()) return;
-  var panel = document.getElementById('admin-content-panel');
-  if (panel) panel.style.setProperty('display','none','important');
-});
+// Скрываем панель при загрузке на мобильном
+if (window.innerWidth <= 768) {
+  document.addEventListener('DOMContentLoaded', function() {
+    var panel = document.getElementById('admin-content-panel');
+    if (panel) panel.style.display = 'none';
+  });
+}
 </script>
 </body>
 </html>
