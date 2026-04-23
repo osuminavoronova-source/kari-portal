@@ -603,8 +603,12 @@
   }
 
   @media (max-width: 768px) {
-    .admin-grid { grid-template-columns: 1fr; }
-    .admin-sidebar { display: none; }
+    .admin-grid { display: flex; flex-direction: column; }
+    .admin-sidebar { display: block !important; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
+    .admin-content { display: none; }
+    .admin-content.mobile-active { display: block; }
+    .admin-sidebar.mobile-hidden { display: none !important; }
+    .mobile-back-btn { display: flex !important; }
     .app-main { padding: 0.75rem; }
     .app-header { padding: 0.75rem 1rem; }
     .header-store { max-width: 130px; font-size: 0.75rem; }
@@ -894,7 +898,8 @@
       <div id="store-sidebar-list"></div>
     </aside>
 
-    <div class="admin-content">
+    <div class="admin-content" id="admin-content-panel">
+      <button class="mobile-back-btn" onclick="mobileGoBack()" style="display:none;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px 16px;font-size:0.85rem;cursor:pointer;margin-bottom:1rem;font-family:var(--font-head);font-weight:600;width:100%;">← Назад к списку магазинов</button>
       <div id="admin-store-view">
         <div style="text-align:center;padding:4rem 2rem;color:var(--muted)">
           <div style="font-size:3rem;margin-bottom:1rem">🏪</div>
@@ -2091,6 +2096,7 @@ function filterSidebar() {
 }
 
 function openAdminStore(storeKey) {
+  mobileOpenStore();
   document.querySelectorAll('.store-list-item').forEach(el => el.classList.remove('active'));
   document.querySelector(`[data-store="${CSS.escape(storeKey)}"]`)?.classList.add('active');
 
@@ -2212,6 +2218,28 @@ logout = function() {
   stopAdminAutoRefresh();
   _origLogout();
 };
+
+function isMobile() {
+  return window.innerWidth <= 768;
+}
+
+function mobileGoBack() {
+  const sidebar = document.querySelector('.admin-sidebar');
+  const contentPanel = document.getElementById('admin-content-panel');
+  if (sidebar) sidebar.classList.remove('mobile-hidden');
+  if (contentPanel) contentPanel.classList.remove('mobile-active');
+}
+
+function mobileOpenStore() {
+  if (!isMobile()) return;
+  const sidebar = document.querySelector('.admin-sidebar');
+  const contentPanel = document.getElementById('admin-content-panel');
+  if (sidebar) sidebar.classList.add('mobile-hidden');
+  if (contentPanel) contentPanel.classList.add('mobile-active');
+  // Show back button
+  const backBtn = document.querySelector('.mobile-back-btn');
+  if (backBtn) backBtn.style.display = 'flex';
+}
 </script>
 </body>
 </html>
