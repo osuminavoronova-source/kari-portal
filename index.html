@@ -604,7 +604,8 @@
 
   @media (max-width: 768px) {
     .admin-grid { display: flex; flex-direction: column; }
-    .admin-sidebar { display: block !important; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
+    .admin-sidebar { display: block; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
+    .admin-sidebar.mobile-hidden { display: none !important; }
     .mobile-back-btn { display: none; width: 100%; margin-bottom: 1rem; }
     .app-main { padding: 0.75rem; }
     .app-header { padding: 0.75rem 1rem; }
@@ -633,11 +634,11 @@
     .stat-value { font-size: 1.4rem; }
     .stat-label { font-size: 0.65rem; }
 
-    /* Мобильное переключение: сайдбар ↔ контент */
+    /* Мобильное переключение сайдбар ↔ контент */
     .admin-content { display: none !important; }
     .admin-content.mobile-active { display: block !important; }
-    .admin-sidebar.mobile-hidden { display: none !important; }
-    .mobile-back-btn { display: none; }
+    .mobile-back-btn { display: none !important; }
+    .mobile-back-btn.visible { display: flex !important; }
   }
 </style>
 </head>
@@ -2233,7 +2234,7 @@ function mobileOpenStore() {
   var backBtn = document.querySelector('.mobile-back-btn');
   if (sidebar) sidebar.classList.add('mobile-hidden');
   if (panel) panel.classList.add('mobile-active');
-  if (backBtn) backBtn.style.display = 'flex';
+  if (backBtn) backBtn.classList.add('visible');
   window.scrollTo(0,0);
 }
 
@@ -2243,7 +2244,7 @@ function mobileGoBack() {
   var backBtn = document.querySelector('.mobile-back-btn');
   if (sidebar) sidebar.classList.remove('mobile-hidden');
   if (panel) panel.classList.remove('mobile-active');
-  if (backBtn) backBtn.style.display = 'none';
+  if (backBtn) backBtn.classList.remove('visible');
   window.scrollTo(0,0);
 }
 
