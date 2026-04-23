@@ -603,9 +603,8 @@
   }
 
   @media (max-width: 768px) {
-    .admin-grid { display: block; }
-    .admin-sidebar { display: block; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
-    .admin-content { display: none; }
+    .admin-grid { display: flex; flex-direction: column; }
+    .admin-sidebar { display: block !important; width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 1rem; }
     .mobile-back-btn { display: none; width: 100%; margin-bottom: 1rem; }
     .app-main { padding: 0.75rem; }
     .app-header { padding: 0.75rem 1rem; }
@@ -2231,10 +2230,9 @@ logout = function() {
 
 
 
-function isMobile() { return window.innerWidth <= 768; }
+function isMobile() { return true; }
 
 function mobileOpenStore() {
-  if (!isMobile()) return;
   var sidebar = document.querySelector('.admin-sidebar');
   var panel = document.getElementById('admin-content-panel');
   var backBtn = document.querySelector('.mobile-back-btn');
@@ -2252,14 +2250,6 @@ function mobileGoBack() {
   if (panel) panel.style.display = 'none';
   if (backBtn) backBtn.style.display = 'none';
   window.scrollTo(0, 0);
-}
-
-// Скрываем панель при загрузке на мобильном
-if (window.innerWidth <= 768) {
-  document.addEventListener('DOMContentLoaded', function() {
-    var panel = document.getElementById('admin-content-panel');
-    if (panel) panel.style.display = 'none';
-  });
 }
 </script>
 </body>
