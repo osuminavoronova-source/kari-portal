@@ -2093,6 +2093,7 @@ function filterSidebar() {
 }
 
 function openAdminStore(storeKey) {
+  alert('Клик! Магазин: ' + storeKey.substring(0,10));
   mobileOpenStore();
   document.querySelectorAll('.store-list-item').forEach(el => el.classList.remove('active'));
   document.querySelector(`[data-store="${CSS.escape(storeKey)}"]`)?.classList.add('active');
@@ -2216,41 +2217,56 @@ logout = function() {
   _origLogout();
 };
 
+function isMobile() {
+  return window.innerWidth <= 768;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-function isMobile() { return true; }
+function mobileGoBack() {
+  const sidebar = document.querySelector('.admin-sidebar');
+  const contentPanel = document.getElementById('admin-content-panel');
+  if (sidebar) sidebar.classList.remove('mobile-hidden');
+  if (contentPanel) contentPanel.classList.remove('mobile-active');
+}
 
 function mobileOpenStore() {
+  if (!isMobile()) return;
+  const sidebar = document.querySelector('.admin-sidebar');
+  const contentPanel = document.getElementById('admin-content-panel');
+  if (sidebar) sidebar.classList.add('mobile-hidden');
+  if (contentPanel) contentPanel.classList.add('mobile-active');
+  // Show back button
+  const backBtn = document.querySelector('.mobile-back-btn');
+  if (backBtn) backBtn.style.display = 'flex';
+}
+
+function isMobile() { return window.innerWidth <= 768; }
+
+function mobileOpenStore() {
+  if (!isMobile()) return;
   var sidebar = document.querySelector('.admin-sidebar');
   var panel = document.getElementById('admin-content-panel');
   var backBtn = document.querySelector('.mobile-back-btn');
-  if (sidebar) sidebar.style.display = 'none';
-  if (panel) panel.style.display = 'block';
-  if (backBtn) backBtn.style.display = 'flex';
-  window.scrollTo(0, 0);
+  if (sidebar) sidebar.style.setProperty('display','none','important');
+  if (panel) panel.style.setProperty('display','block','important');
+  if (backBtn) backBtn.style.setProperty('display','flex','important');
+  window.scrollTo(0,0);
 }
 
 function mobileGoBack() {
   var sidebar = document.querySelector('.admin-sidebar');
   var panel = document.getElementById('admin-content-panel');
   var backBtn = document.querySelector('.mobile-back-btn');
-  if (sidebar) sidebar.style.display = 'block';
-  if (panel) panel.style.display = 'none';
-  if (backBtn) backBtn.style.display = 'none';
-  window.scrollTo(0, 0);
+  if (sidebar) sidebar.style.removeProperty('display');
+  if (panel) panel.style.setProperty('display','none','important');
+  if (backBtn) backBtn.style.removeProperty('display');
+  window.scrollTo(0,0);
 }
+
+window.addEventListener('load', function() {
+  if (!isMobile()) return;
+  var panel = document.getElementById('admin-content-panel');
+  if (panel) panel.style.setProperty('display','none','important');
+});
 </script>
 </body>
 </html>
