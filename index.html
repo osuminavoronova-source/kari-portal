@@ -2100,7 +2100,6 @@ function filterSidebar() {
 }
 
 function openAdminStore(storeKey) {
-  mobileOpenStore();
   document.querySelectorAll('.store-list-item').forEach(el => el.classList.remove('active'));
   document.querySelector(`[data-store="${CSS.escape(storeKey)}"]`)?.classList.add('active');
 
@@ -2156,6 +2155,16 @@ function openAdminStore(storeKey) {
       </table>
     </div>
   `;
+
+  // Теперь контент готов — переключаем экран на мобильном
+  if (window.innerWidth <= 900) {
+    var src = document.getElementById('admin-store-view');
+    var dst = document.getElementById('mobile-store-content');
+    var titleEl = document.getElementById('mobile-store-title');
+    if (src && dst) dst.innerHTML = src.innerHTML;
+    if (titleEl) titleEl.textContent = storeKey.substring(0, 15);
+    showScreen('mobile-store-screen');
+  }
 }
 
 function showToast(msg, type) {
@@ -2237,20 +2246,16 @@ logout = function() {
 
 
 
+
+
+
+
+
+
 function isMobile() { return window.innerWidth <= 900; }
-
-function mobileOpenStore() {
-  if (!isMobile()) return;
-  // Копируем контент из admin-store-view в мобильный экран
-  var src = document.getElementById('admin-store-view');
-  var dst = document.getElementById('mobile-store-content');
-  if (src && dst) dst.innerHTML = src.innerHTML;
-  showScreen('mobile-store-screen');
-}
-
-function mobileGoBack() {
-  showScreen('admin-screen');
-}
+function mobileOpenStore() { /* вызов встроен в openAdminStore */ }
+function mobileGoBack() { showScreen('admin-screen'); }
 </script>
 </body>
 </html>
+
