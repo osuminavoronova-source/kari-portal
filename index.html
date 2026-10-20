@@ -1601,6 +1601,26 @@ async function exportXLSX() {
   const allBorders   = { top: borderStyle, left: borderStyle, bottom: borderStyle, right: borderStyle };
 
   // --- Build per-store overrides map ---
+  // Вспомогательная функция: проверяет, относится ли дата увольнения к текущему отчётному месяцу
+  // Если дата старше текущего месяца — это устаревшие данные, игнорируем
+  const isCurrentMonthFired = (dateStr) => {
+    if (!dateStr) return false; // нет даты — не считаем уволенным
+    const now = new Date();
+    const curYear = now.getFullYear();
+    const curMonth = now.getMonth() + 1;
+    // Поддерживаем форматы: ГГГГ-ММ-ДД и ДД.ММ.ГГГГ
+    let year, month;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+      [year, month] = dateStr.split('-').map(Number);
+    } else if (/^\d{2}\.\d{2}\.\d{4}$/.test(dateStr)) {
+      const parts = dateStr.split('.');
+      month = Number(parts[1]); year = Number(parts[2]);
+    } else {
+      return true; // неизвестный формат — считаем актуальным
+    }
+    return year === curYear && month === curMonth;
+  };
+
   const storeOverrides = {};
   STORE_KEYS.forEach(storeKey => {
     STORES[storeKey].employees.forEach(emp => {
@@ -1608,12 +1628,10 @@ async function exportXLSX() {
       const statusOverride = getStatusOverrideByKey(storeKey, empKey);
       const date = getFiredValueByKey(storeKey, empKey);
       const baseStatus = normalizeStatus(emp.status);
-      // Если в текущем Excel сотрудник числится как работающий (пустой статус),
-      // то Firebase-статус "Уволен" игнорируем — это устаревшие данные
-      const storesStatusIsWorking = !emp.status || emp.status === '' || normalizeStatus(emp.status) === 'Работает';
-      const fbStatusIsFired = statusOverride === 'Уволен';
-      const effectiveOverride = (fbStatusIsFired && storesStatusIsWorking) ? null : statusOverride;
-      const effectiveDate = (fbStatusIsFired && storesStatusIsWorking) ? '' : date;
+      // Если Firebase говорит "Уволен" но дата увольнения НЕ текущий месяц — это устаревшие данные
+      const fbFiredIsStale = statusOverride === 'Уволен' && !isCurrentMonthFired(date);
+      const effectiveOverride = fbFiredIsStale ? null : statusOverride;
+      const effectiveDate = fbFiredIsStale ? '' : date;
       const effectiveStatus = effectiveOverride || baseStatus;
       if (effectiveOverride || effectiveDate || effectiveStatus === 'Уволен') {
         if (!storeOverrides[storeKey]) storeOverrides[storeKey] = {};
@@ -1661,22 +1679,17 @@ async function exportXLSX() {
 
         // Статус: из firedData если директор вносил, иначе из исходного Excel
         let finalStatus = normalizeStatus(String(rowObj.c['4'] ?? ''));
-        // Найдём сотрудника в STORES чтобы проверить текущий статус
-        const storeForEmp = STORE_KEYS.find(k => k.startsWith((storeKey||'').substring(0, 10)));
-        const empInStores = storeForEmp && STORES[storeForEmp]
-          ? STORES[storeForEmp].employees.find(e =>
-              (empNum !== null && e.num === empNum) ||
-              (empNum === null && e.name === empName))
-          : null;
-        const storesWorking = !empInStores || !empInStores.status || empInStores.status === '' || normalizeStatus(empInStores.status) === 'Работает';
         if (storeKey && firedData[storeKey]) {
           const fd = firedData[storeKey][empKey]
                   || firedData[storeKey][String(empNum)]
                   || firedData[storeKey][Number(empKey)]
                   || null;
-          // Игнорируем Firebase "Уволен" если текущий Excel показывает что сотрудник работает
-          if (fd && fd.status && !(normalizeStatus(fd.status) === 'Уволен' && storesWorking)) {
-            finalStatus = normalizeStatus(fd.status);
+          if (fd && fd.status) {
+            // Игнорируем "Уволен" если дата увольнения не текущий месяц (устаревшие данные)
+            const fdStatus = normalizeStatus(fd.status);
+            if (!(fdStatus === 'Уволен' && !isCurrentMonthFired(fd.date || ''))) {
+              finalStatus = fdStatus;
+            }
           }
         }
 
@@ -1771,22 +1784,18 @@ async function exportXLSX() {
       // Статус и дата из портала (firedData)
       let finalStatus = normalizeStatus(String(c['4'] ?? '')); // исходный статус из Excel
       let date = '';
-      // Найдём сотрудника в STORES для проверки актуального статуса
-      const empInStoresP1 = sk && STORES[sk]
-        ? STORES[sk].employees.find(e =>
-            (empNum !== null && e.num === empNum) ||
-            (empNum === null && e.name === empName))
-        : null;
-      const storesWorkingP1 = !empInStoresP1 || !empInStoresP1.status || empInStoresP1.status === '' || normalizeStatus(empInStoresP1.status) === 'Работает';
       if (sk && firedData[sk]) {
         const fd = firedData[sk][empKey]
                 || firedData[sk][String(empNum)]
                 || firedData[sk][Number(empKey)]
                 || null;
-        // Игнорируем Firebase "Уволен" если текущий Excel показывает что сотрудник работает
-        if (fd && fd.status && !(normalizeStatus(fd.status) === 'Уволен' && storesWorkingP1)) {
-          finalStatus = normalizeStatus(fd.status);
-          date = fd.date || '';
+        if (fd && fd.status) {
+          const fdStatus = normalizeStatus(fd.status);
+          // Игнорируем "Уволен" если дата увольнения не текущий месяц (устаревшие данные)
+          if (!(fdStatus === 'Уволен' && !isCurrentMonthFired(fd.date || ''))) {
+            finalStatus = fdStatus;
+            date = fd.date || '';
+          }
         }
       }
 
