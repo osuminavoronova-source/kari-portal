@@ -1740,8 +1740,7 @@ async function exportXLSX() {
     // Строка заголовков — col1 содержит текст заголовка (не число, не DC, не магазин)
     if (aStr === '№ в группе' || aStr === '№ п/п')  rowType = 'header';
     else if (aStr === 'КАРИ КЗ')        rowType = 'company';
-    else if (/^DC\d+/.test(aStr) && typeof c['2'] === 'number') { rowType = 'divStart'; currentDivName = aStr; }
-    else if (/^DC\d+/.test(aStr) && (c['2'] === null || c['2'] === undefined || c['2'] === '')) { rowType = 'divEnd'; currentDivName = null; }
+    else if (/^DC\d+/.test(aStr)) { rowType = 'divStart'; currentDivName = aStr; }
     else if (/^\d{5}/.test(aStr))       { rowType = 'store'; currentStoreKey = aStr; }
     else if (typeof a === 'number' && a > 0) rowType = 'employee';
     // Сотрудник без номера (num=null) — col B = ФИО строка
