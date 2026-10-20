@@ -1625,8 +1625,15 @@ async function exportXLSX() {
   STORE_KEYS.forEach(storeKey => {
     STORES[storeKey].employees.forEach(emp => {
       const empKey = emp.num !== null && emp.num !== undefined ? String(emp.num) : 'name_' + emp.name.replace(/\s+/g, '_');
-      const statusOverride = getStatusOverrideByKey(storeKey, empKey);
-      const date = getFiredValueByKey(storeKey, empKey);
+      // Для сотрудников без номера также ищем по имени напрямую в Firebase
+      const fdRaw = firedData[storeKey] ? (
+        firedData[storeKey][empKey] ||
+        (emp.num !== null ? firedData[storeKey][String(emp.num)] : null) ||
+        firedData[storeKey][emp.name] ||
+        null
+      ) : null;
+      const statusOverride = fdRaw ? normalizeStatus(fdRaw.status) : getStatusOverrideByKey(storeKey, empKey);
+      const date = fdRaw ? (fdRaw.date || '') : getFiredValueByKey(storeKey, empKey);
       const baseStatus = normalizeStatus(emp.status);
       // Если Firebase говорит "Уволен" но дата увольнения НЕ текущий месяц — это устаревшие данные
       const fbFiredIsStale = statusOverride === 'Уволен' && !isCurrentMonthFired(date);
@@ -1681,8 +1688,9 @@ async function exportXLSX() {
         let finalStatus = normalizeStatus(String(rowObj.c['4'] ?? ''));
         if (storeKey && firedData[storeKey]) {
           const fd = firedData[storeKey][empKey]
-                  || firedData[storeKey][String(empNum)]
-                  || firedData[storeKey][Number(empKey)]
+                  || (empNum !== null ? firedData[storeKey][String(empNum)] : null)
+                  || (empNum !== null ? firedData[storeKey][Number(empKey)] : null)
+                  || firedData[storeKey][empName]
                   || null;
           if (fd && fd.status) {
             // Игнорируем "Уволен" если дата увольнения не текущий месяц (устаревшие данные)
@@ -1786,8 +1794,9 @@ async function exportXLSX() {
       let date = '';
       if (sk && firedData[sk]) {
         const fd = firedData[sk][empKey]
-                || firedData[sk][String(empNum)]
-                || firedData[sk][Number(empKey)]
+                || (empNum !== null ? firedData[sk][String(empNum)] : null)
+                || (empNum !== null ? firedData[sk][Number(empKey)] : null)
+                || firedData[sk][empName]
                 || null;
         if (fd && fd.status) {
           const fdStatus = normalizeStatus(fd.status);
